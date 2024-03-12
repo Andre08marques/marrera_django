@@ -128,9 +128,9 @@ def conectar(request, id):
     print (qr_code_data)
     zap = whatsapp.objects.filter(usuario=request.user)
     # context
-    whatsapp_total = whatsapp.objects.all().count()
-    whatsapp_ativo = whatsapp.objects.filter(status="open").count()
-    whatsapp_inativo = whatsapp.objects.filter(status="close").count()
+    whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
+    whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
+    whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
     whatsapp_context = { 
 
                 "whatsapp_total": whatsapp_total,
