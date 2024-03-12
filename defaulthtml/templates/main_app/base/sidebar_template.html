@@ -1,0 +1,131 @@
+{% load static %}
+{% load permission_tags %}
+<aside class="main-sidebar sidebar-dark-info elevation-4">
+    <!-- Brand Logo -->
+    {% if user|has_role:"admin" %}
+    <a href="{% url 'home' %}" class="brand-link">
+        <img src="{% static 'dist/img/uva.jpg' %}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" >
+        <span class="brand-text font-weight-light">Admin Panel</span>
+    </a>
+    {% endif %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{% static 'dist/img/user.png' %}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{user}}</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    {% url 'home' as home %}
+                    <a href="{{ home }}" class="nav-link {% if home == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Home
+
+                        </p>
+                    </a>
+                </li>
+                {% if user|has_role:"admin" %}
+                <!-- whatsapp -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-poll-h"></i>
+                        <p>
+                            Whatzapp
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            {% url 'whatsapp_list' as whatsapp_list %}
+                            <a href="{{whatsapp_list}}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Criar Instância
+
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            {% url 'whatsapp_list' as whatsapp_list %}
+                            <a href="{{whatsapp_list}}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Grupos
+
+                                </p>
+                            </a>
+                        </li>
+    
+                    </ul>
+                </li>
+                <!-- /whatzapp -->
+                {% endif %}
+
+                <!-- user -->
+                {% if user|has_role:"admin" %}
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-plus"></i>
+                        <p>
+                            User
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            {% url 'userform' as userform %}
+                            <a href="{{userform}}"
+                                class="nav-link  {% if userform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Add User
+
+                                </p>
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                {% url 'userlist' as userlist%}
+                                <a href="{{userlist}}"
+                                    class="nav-link  {% if userlist == request.path %} active {% endif %}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Gerenciar User
+
+                                    </p>
+                                </a>
+                            </li>
+                    </ul>
+                </li>
+                {% endif %}
+                <!-- /.user -->
+
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}"
+                        onclick="return confirm('Sua sessão seria encerrada.\n\nProcede?')"
+                        class="nav-link">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

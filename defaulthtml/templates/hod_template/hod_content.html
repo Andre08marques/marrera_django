@@ -1,0 +1,270 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block content %}
+{% csrf_token %}
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+
+            <!-- Card Example - Total de Instâncias -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total de Instâncias</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ whatsapp_context.whatsapp_total }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-server fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Example - Instâncias Ativas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Instâncias Conectadas
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ whatsapp_context.whatsapp_ativo }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-code fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Example - Instâncias Desconectadas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Instâncias
+                                    Desconectadas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ whatsapp_context.whatsapp_inativo }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-code fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Example - Instâncias Expiradas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1">Vencimento -
+                                    {{ cliente.vencimento }}
+                                </div>
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1">Meu Plano -
+                                    {{ cliente.plano__plano }}
+                                </div>
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1" style="color:red;">Para alterar o seu plano chame o suporte!
+                                </div>
+                                </br>
+                                <a href="{% url 'fatura' %}" class="btn btn-warning" target="_blank" style="color:black;box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);">Renovar assinatura</a>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row --> 
+        
+        <div class="card shadow mb-3">
+            <div class="card-header py-3 shadow-sm" style="background-color: #4e73df;">
+                <h6 class="m-0 font-weight-bold text-white d-flex justify-content-between align-items-center">
+                    <span>Instâncias WhatsApp</span>
+                    <div class="d-flex flex-column flex-sm-row">
+                        <a href="#" class="mb-2 mb-sm-0 btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#compra">
+                            <i class="fas fa-plus mr-1"></i> Criar nova instância
+                        </a>
+                        <a href="integracoes.php" class="mb-2 mb-sm-0 ml-sm-2 btn btn-sm btn-light shadow-sm">
+                            <i class="fa fa-code mr-1"></i> Integrações
+                        </a>
+                        <a href="https://documenter.getpostman.com/view/26974034/2s9XxwvZ1n" class="ml-sm-2 btn btn-sm btn-danger shadow-sm">
+                            <i class="fa fa-book mr-1"></i> Documentação API
+                        </a>
+                    </div>
+                </h6>
+            </div>
+        </div>
+            <div class="card-body">
+                <div class="row">
+                         {%if zap %}
+                           {% for inst in zap %}
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-user mr-2"></i>
+                                                {{ inst.nome }}
+                                            </div>
+                                        </h5>
+                                        <p class="card-text">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-key mr-2"></i>
+                                            <span style="word-break: break-all;">
+                                                {{ inst.key }}
+                                            </span>
+                                        </div>
+                                        </p>
+                                        <p class="card-text">
+                                            {% if inst.status == 'open' %}
+                                                <span class="text-success">
+                                                    <i class="fas fa-circle"></i>
+                                                    conectado
+                                                </span>
+                                            {% elif inst.status == 'close' %}
+                                                <span class="text-danger">
+                                                    <i class="fas fa-circle"></i>
+                                                    desconectado
+                                                </span>
+                                            {% else %}
+                                            <span class="text-warning">
+                                                <i class="fas fa-circle"></i>
+                                                conectando
+                                            </span>
+                                            {% endif %}
+                                              
+                                        </p>
+
+                                        <div class="text-center mt-3">
+                                            <!-- Botão de conexão -->
+                                            <a class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0" href="{% url 'conectar' inst.id %}">
+                                                <i class="fas fa-qrcode mr-1"></i>Conexão Whatsapp
+                                            </a>
+                                            <form action="functions/code.php" method="post" class="d-inline">
+                                                <input type="hidden" name="token_instancia" value="<?= $row['token']; ?>">
+                                                <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $userid; ?>">
+
+                                                <!-- Botão para acionar o modal -->
+                                                <button type="button" class="btn btn-danger btn-sm ml-2 mt-2 mt-md-0" data-toggle="modal" data-target="#confirmDeleteModal{{inst.id}}">
+                                                    <i class="fas fa-trash-alt mr-1"></i> Apagar instância
+                                                </button>
+
+                                                <!-- Modal de confirmação -->
+                                                <div class="modal fade" id="confirmDeleteModal{{inst.id}}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação de
+                                                                    Exclusão</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Tem certeza de que deseja excluir esta instância com o token:
+                                                                token
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <!-- Botão para confirmar a exclusão -->
+                                                                <a class="btn btn-danger" href="{% url 'whatsapp_delete' inst.id %}">exluir</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                            <p>Nenhum registro encontrado</p>
+                        {% endif %}
+                    </div>
+                    {%if whatsapp_context.qrcode  %}
+                      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                      <script>
+                        $(document).ready(function(){
+                           $('#conectmodak').modal('show')
+                        });
+                      </script>
+                    {%endif%}
+                    <!-- INICIO MODAL COMPRAR INSTANCIA -->
+                    <div class="modal fade" id="compra" tabindex="-1" role="dialog" aria-labelledby="compra" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Contratar Instância</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="post" action="{%url 'whatsapp_form' %}">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Tem certeza que deseja contratar uma nova instância?</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nome da Instância</label>
+                                            <input type="text" name="nome" class="form-control" placeholder="Informe um nome para instância" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            <i class="fas fa-times mr-1"></i> Voltar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-check mr-1"></i> Contratar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIM MODAL COMPRAR INSTANCIA -->
+
+                    <!-- MODAL GERAR QRCODE-->
+                    <div class="modal" id="conectmodak" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">CONEXÃO COM whatsapp</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body text-center">
+                            <p><img src="{{ whatsapp_context.qrcode }}" width="300" height="300"/>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="{% url 'home' %}" class="btn btn-info" role="button">FECHAR</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Modal -->
+                </div>
+        </div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+<section class="content text-center">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ page_title }}</h3>
+                    </div>
+                        <h5 class="card-title">Exluir Ocorrência?</h5>
+                        <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p>Ocorrência: {{ocorrencia.nome }}</p>
+                        <p>Data: {{ocorrencia.data }}</p>
+                        <p>Modelo: {{ocorrencia.modelo }}</p>
+                        <p>lider: {{ocorrencia.lider }}</p>
+                        <p>email: {{ocorrencia.email }}</p>
+                        <p>Valor: {{ocorrencia.valor_do_reparo }}</p>
+                        <button type="submit" class="btn btn-danger mt-1 mb-2">EXCLUIR</button>
+                        <a href={% url 'ocorrencialist' %}>Cancelar</a>
+                        </form>
+                   </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
