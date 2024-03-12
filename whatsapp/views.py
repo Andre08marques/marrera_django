@@ -125,7 +125,6 @@ def conectar(request, id):
     buffer.seek(0)
     encoded_img = b64encode(buffer.read()).decode()
     qr_code_data = f'data:image/png;base64,{encoded_img}'
-    print (qr_code_data)
     zap = whatsapp.objects.filter(usuario=request.user)
     # context
     whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
