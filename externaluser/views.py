@@ -24,6 +24,7 @@ def register(request):
             username = (request.POST["email"])
             email =  (request.POST["email"])
             senha =  (request.POST["senha"])
+            print ()
             #Adicionar um usuário
             try: 
                 user = User.objects.get(username=username)

@@ -35,7 +35,7 @@ def cadastrar_cliente(body, token):
         oclient = 'taxpayer_id'
         typofname = 'personal_name'
     else:
-        ocliente = 'ein'
+        oclient = 'ein'
         typofname = 'company_name'
         
     json_data = {
