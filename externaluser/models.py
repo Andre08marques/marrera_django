@@ -56,8 +56,9 @@ class Plano(models.Model):
     
 class perfil(models.Model):
     nome = models.CharField(max_length=50, null=True)
-    cpf_cnpj = models.CharField(choices=tipo_pessoa, max_length=20, unique=True, null=True)
-    plano = models.OneToOneField(Plano, blank=True, null=True, on_delete=models.PROTECT)
+    cpf_cnpj = models.CharField(choices=tipo_pessoa, max_length=20, null=True)
+    cpf_or_cnpj = models.CharField(max_length=30, unique=True, null=True )
+    plano = models.ForeignKey(Plano, blank=True, null=True, on_delete=models.PROTECT)
     celular = models.CharField(max_length=15, unique=True, null=True )
     email = models.CharField(max_length=50, null=True)
     descricaoEndereco = models.CharField(max_length=100, null=True)
