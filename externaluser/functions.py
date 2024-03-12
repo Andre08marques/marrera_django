@@ -40,7 +40,7 @@ def cadastrar_cliente(body, token):
         
     json_data = {
         'person_type': type_cliente,
-        f'{oclient}': body['cpfCnpj'],
+        f'{oclient}': body['cpf_or_cnpj'],
         f'{typofname}': body['nome'],
         'telephone': body['celular'],
         'cellular': body['celular'],
