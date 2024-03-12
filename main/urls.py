@@ -25,6 +25,7 @@ from integracoes import urls as integracoes_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path ('', home, name='home'),
     path ('home/', home, name='home'),
     path('zap/', include(whatzapp_urls)),
     path('externaluser/', include(perfil_urls)),
