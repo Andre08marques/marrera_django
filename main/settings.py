@@ -33,8 +33,8 @@ APPEND_SLASH=False
 DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*.urbanovitalino.adv.com']
-CSRF_TRUSTED_ORIGINS = ['https://rh.urbanovitalino.adv.br']
+CSRF_TRUSTED_ORIGINS = ['https://*.marrera.net']
+CSRF_TRUSTED_ORIGINS = ['https://app.marrera.net']
 
 # Application definition
 
