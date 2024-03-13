@@ -31,7 +31,6 @@ def home(request):
         }
         zap = whatsapp.objects.filter(usuario=request.user)
         cliente = perfil.objects.filter(usuario=request.user).values("plano__plano","vencimento")
-        print (cliente)
         cliente_ok = (cliente[0])
         return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, "cliente": cliente_ok})
     else:
@@ -46,7 +45,6 @@ def home(request):
         }
         zap = whatsapp.objects.filter(usuario=request.user)
         cliente = perfil.objects.filter(usuario=request.user)
-        print (cliente)
         return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, cliente: 'cliente'})
 
 @login_required
@@ -142,7 +140,6 @@ def whatsapp_desconect(request, id):
     apikey = (zapp[0]['key'])
     nome = (zapp[0]['nome'])
     data = instance_desconect(apikey,nome)
-    print (data)
     zapp = whatsapp.objects.filter(usuario=request.user)
     zapp_paginator = Paginator(zapp, 10)
     page_num = request.GET.get('page')

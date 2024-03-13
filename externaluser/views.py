@@ -24,7 +24,6 @@ def register(request):
             username = (request.POST["email"])
             email =  (request.POST["email"])
             senha =  (request.POST["senha"])
-            print ()
             #Adicionar um usuário
             try: 
                 user = User.objects.get(username=username)
@@ -59,7 +58,6 @@ def gerar_fatura(request):
     if data['success'] == True:
         fatura_id = data['data']['id']
         cliente = perfil.objects.get(email=request.user) 
-        print (cliente)
         fatura_create = Fatura_gerada.objects.create(cliente=cliente,id_fatura=data['data']['id'], due_date=data['data']['due_date'], price= data['data']['price'])
         return redirect(f'https://app.cobrefacil.com.br/minha-fatura/{fatura_id}')
     else:
