@@ -55,6 +55,7 @@ def gerar_fatura(request):
     vencimento = (p[0]['vencimento'])
     cobrefacilid = (p[0]['cobrefacil_id'])
     data = gerar_faturar(token,cobrefacilid,vencimento,price)
+    print (data)
     if data['success'] == True:
         fatura_id = data['data']['id']
         cliente = perfil.objects.get(email=request.user) 
