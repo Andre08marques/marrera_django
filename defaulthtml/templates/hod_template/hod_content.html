@@ -231,10 +231,10 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="this.form.submit(); this.disabled=true; this.value='Enviando';">
                                             <i class="fas fa-times mr-1"></i> Voltar
                                         </button>
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary" >
                                             <i class="fas fa-check mr-1"></i> Contratar
                                         </button>
                                     </div>
@@ -265,6 +265,63 @@
                       </div>
                     </div>
                     <!-- /Modal -->
+
+                    <!-- INICIO MODAL TROCAR SENHA -->
+                    <div class="modal fade" id="reset_password" tabindex="-1" role="dialog" aria-labelledby="reset_password" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Restar password</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="post" action="{%url 'reset_password' %}">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Tem certeza que deseja alterar sua senha?</label>
+                                        </div>
+                                        <div class=" mb-3 mb-sm-0">
+                                            <label for="senha" class="form-label custom-label">Senha</label>
+                                            <input type="password" required="required" class="form-control form-control-user" id="senha" name="senha" placeholder="Senha">
+                                        </div>
+                                        <div class="">
+                                            <label for="resenha" class="form-label custom-label">Confirmar senha</label>
+                                            <input type="password" required="required" class="form-control form-control-user" id="resenha" name="resenha" placeholder="Confirmar senha...">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            <i class="fas fa-times mr-1"></i> Voltar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" onClick="this.form.submit(); this.disabled=true; this.value='Enviando'; ">
+                                            <i class="fas fa-check mr-1"></i> Alterar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIM MODAL TROCA SENHA -->
+                    <script>
+                        let senha = document.getElementById('senha');
+                        let senhaC = document.getElementById('resenha');
+
+                        function validarSenha() {
+                        if (senha.value != senhaC.value) {
+                            senhaC.setCustomValidity("Senhas diferentes!");
+                            senhaC.reportValidity();
+                            return false;
+                        } else {
+                            senhaC.setCustomValidity("");
+                            return true;
+                        }
+                        }
+
+                        // verificar também quando o campo for modificado, para que a mensagem suma quando as senhas forem iguais
+                        senhaC.addEventListener('input', validarSenha);
+                    </script>
                 </div>
         </div>
 {% endblock content %}

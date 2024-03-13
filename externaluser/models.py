@@ -51,6 +51,7 @@ class Plano(models.Model):
     plano = models.CharField(max_length=40, null=True)
     price = models.DecimalField(null=True, max_digits=10, decimal_places=2)
     status = models.CharField(choices=status, max_length=40, null=True)
+    quantidade = models.IntegerField(null=True)
     def __str__(self):
         return self.plano
     

@@ -81,7 +81,6 @@ def whatsapp_list(request):
 def whatsapp_form(request):
     usuario = request.user
     if request.method == "GET":
-        
         form = WhatsappForm()
         context = {
             'form': form,
@@ -89,27 +88,24 @@ def whatsapp_form(request):
         }
         return render(request, 'zap/whatsappform.html', context=context)
     else:
-        instancia = create_instance()
-        form = WhatsappForm(request.POST)
-        print (form)
-        if form.is_valid():
-            instance_total = whatsapp.objects.filter(usuario=request.user).count()
-            #zapp = whatsapp.objects.filter(pk=id).values('plano')
-            #plano = (zapp[0]['plano'])
-            #print (f'{plano}'+''+{instance_total})
-            instance = form.save(commit=False)
-            instance.usuario = usuario
-            instance.key = instancia["hash"]['apikey']
-            instance.save()
-            client = form.save()
-            messages.success(request,'Instância Cadastrada com sucesso')
+        qtd_instancia = whatsapp.objects.filter(usuario=request.user).count()
+        qtd_plano = perfil.objects.filter(usuario=request.user).values('plano__quantidade')
+        if qtd_instancia >= qtd_plano[0]['plano__quantidade']:
+            messages.error(request,'Você atingiu o número máximo de instâncias que o seu plano permite! Entre em contato com o suporte para saber mais')
             return redirect('home')
+        else:
+            instancia = create_instance()
+            form = WhatsappForm(request.POST)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.usuario = usuario
+                instance.key = instancia["hash"]['apikey']
+                instance.save()
+                client = form.save()
+                messages.success(request,'Instância Cadastrada com sucesso')
+                return redirect('home')
 
-        context = {
-            'form': form,
-            'page_title': 'Adicionar Instância'
-        }
-        return render(request, 'zap/whatsapplist.html', context=context)
+      
 
 
 @login_required

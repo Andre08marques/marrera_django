@@ -87,6 +87,15 @@ def webhook(request):
                p = perfil.objects.filter(cobrefacil_id=data_dict['data']['customer']['id']).update(vencimento=novo_vencimento)
 
         return HttpResponse("Webhook received!")
+
+# view para trocar a senha do usuário
+def reset_password(request):
+    usuario = User.objects.get(username=request.user)
+    new_password = request.POST["senha"]
+    usuario.set_password(new_password)
+    usuario.save()
+    messages.success(request, 'Sua senha foi alterada! Entre com a nova senha')
+    return redirect("login")
         
 
     
