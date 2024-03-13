@@ -15,6 +15,9 @@ import json
 def thirty_day_hence(data):
     return data + timezone.timedelta(days=30)
 
+def one_day_hence(data):
+    return data + timezone.timedelta(days=1)
+
 # Create your views here.
 def register(request):
     form = PerfilForm()
@@ -52,7 +55,7 @@ def gerar_fatura(request):
     p = perfil.objects.filter(email=request.user).values('cobrefacil_id','vencimento','plano__price')
     token = autenticar()
     price = (p[0]['plano__price'])
-    vencimento = (p[0]['vencimento'])
+    vencimento = one_day_hence(timezone.now())
     cobrefacilid = (p[0]['cobrefacil_id'])
     data = gerar_faturar(token,cobrefacilid,vencimento,price)
     print (data)
