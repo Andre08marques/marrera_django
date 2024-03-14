@@ -82,12 +82,14 @@ def webhook(request):
                                                                                       )
            
            if vencimento[0]['cliente__vencimento'] < date.today():
-               novo_vencimento = thirty_day_hence(timezone.now())
+               novo_vencimento = thirty_day_hence(date.today())
                p = perfil.objects.filter(cobrefacil_id=data_dict['data']['customer']['id']).update(vencimento=novo_vencimento)
            else:
                novo_vencimento = thirty_day_hence(vencimento[0]['cliente__vencimento'])
                p = perfil.objects.filter(cobrefacil_id=data_dict['data']['customer']['id']).update(vencimento=novo_vencimento)
 
+        return HttpResponse("Webhook received!")
+    else:
         return HttpResponse("Webhook received!")
 
 # view para trocar a senha do usuário
