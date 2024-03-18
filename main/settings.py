@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'externaluser',
     'defaulthtml',
     'whatsapp',
+    'ferramentas',
     'main',
     'rolepermissions',
     'django.contrib.admin',

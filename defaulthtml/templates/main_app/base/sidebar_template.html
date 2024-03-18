@@ -36,10 +36,10 @@
                         </p>
                     </a>
                 </li>
-                <!-- whatsapp -->
+                <!-- Inicio sidebar perfil -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-poll-h"></i>
+                        <i class="far fa-address-card"></i>
                         <p>
                             Perfil
                             <i class="fas fa-angle-left right"></i>
@@ -58,7 +58,42 @@
                         </li>
                     </ul>
                 </li>
-                <!-- /whatzapp -->
+                <!-- /sidebar perfil -->
+                 <!-- Inicio sidebar ferramentas -->
+                 <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tools"></i>
+                        <p>
+                            Ferramentas
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'listargrupos' %}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Listar Grupos
+
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href=""
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Enviar mensagem
+
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /sidebar ferramentas -->
                 {% if user|has_role:"admin" %}
                 <!-- whatsapp -->
                 <li class="nav-item has-treeview">

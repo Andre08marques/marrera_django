@@ -1,0 +1,88 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content text-center">
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+              <div class="col-4">
+                <form action="{% url 'listargrupos' %}" method="post" class="form-inline mb-2">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <div class="form-group">
+                      <select class="form-control" name="pesquisa" id="exampleFormControlSelect1">
+                        {% for instancia in zap %}
+                         <option>{{instancia.nome}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ page_title }}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    {%if grupos %}
+                      <div class="card-body">
+                          <table id="example2" class="table table-bordered table-hover">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th>#</th>
+                                  <th scope="col">ID DO GRUPO</th>
+                                  <th scope="col">NOME DO GRUPO</th>
+                                  <th scope="col">Opções</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                      {% for g in grupos %}
+                                          <tr>
+                                              <td>
+                                              {{ forloop.counter }}
+                                              </td>
+                                              <td>
+                                                  {{ g.id  }}
+                                              </td>
+                                              <td>
+                                                {{ g.subject }}
+                                                </td>
+                                                <td>
+                                                  
+                                                  <button type="button" onclick="copyToClipboard('{{ g.id }}')" class="btn btn-success">COPIAR ID</button>
+                                                </td>
+                                      {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                    {%else%}
+                      <div class="pt-5 pb-5">
+                            Escolha uma instancia
+                      </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script>
+    function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert("ID do grupo copiado: " + text);
+            }).catch(function(error) {
+                alert("Erro ao copiar: ", error);
+            });
+        }
+  </script>
+</section>
+{% endblock content %}

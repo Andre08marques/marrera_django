@@ -1,11 +1,15 @@
 import requests
+# importar a biblioteca
+from dotenv import load_dotenv
+import os
+
 
 
 def create_instance():
     hash = gerar_chave()
     headers = {
                 'Content-Type': 'application/json',
-                'apikey': '62ce3b0f-6604-4df8-bbda-8707380a03fb'
+                'apikey': os.getenv('evolutionapikey')
             }
     json_data = {
                         "instanceName": f"{hash}",
@@ -54,7 +58,7 @@ def instance_delete(apikey, nome):
 #pegar todas as intâncias criadas
 def get_instances():
     headers = {
-                'apikey': '62ce3b0f-6604-4df8-bbda-8707380a03fb'
+                'apikey': os.getenv('evolutionapikey')
             }
     
     try:
