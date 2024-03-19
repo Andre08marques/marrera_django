@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'defaulthtml',
     'whatsapp',
     'ferramentas',
+    'integracoes',
     'main',
     'rolepermissions',
     'django.contrib.admin',

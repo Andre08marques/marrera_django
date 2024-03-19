@@ -1,0 +1,503 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card">
+                    <div class="alert alert-danger">
+                        <strong>Aviso!</strong> Não forneça seu Token de acesso a niguem! Ele poderá ser usado para o mal!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <h3 class="box-title ml-3">Integrações:</h3>
+                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="controllr-tab" data-toggle="tab" href="#controllr" role="tab" aria-controls="controllr" aria-selected="true">
+                                <i class="fas fa-code"></i> CONTROLLR
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="gerenet-tab" data-toggle="tab" href="#gerenet" role="tab" aria-controls="gerenet" aria-selected="true">
+                                <i class="fas fa-cogs"></i> GERENET
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="global-tab" data-toggle="tab" href="#global" role="tab" aria-controls="global" aria-selected="true">
+                                <i class="fas fa-globe"></i> OUTROS SISTEMAS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ispfy-tab" data-toggle="tab" href="#ispfy" role="tab" aria-controls="ispfy" aria-selected="true">
+                                <i class="fas fa-server"></i> ISPFY
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ixc-tab" data-toggle="tab" href="#ixc" role="tab" aria-controls="ixc" aria-selected="true">
+                                <i class="fas fa-mobile-alt"></i> IXC SOFT
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="magnusbilling-tab" data-toggle="tab" href="#magnusbilling" role="tab" aria-controls="magnusbilling" aria-selected="true">
+                                <i class="fas fa-wallet"></i> MAGNUS BILLING
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="mikrotik-tab" data-toggle="tab" href="#mikrotik" role="tab" aria-controls="mikrotik" aria-selected="true">
+                                <i class="fas fa-server"></i> MIKROTIK
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="mkauth-tab" data-toggle="tab" href="#mkauth" role="tab" aria-controls="mkauth" aria-selected="true">
+                                <i class="fas fa-user-secret"></i> MK-AUTH
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="mksolutions-tab" data-toggle="tab" href="#mksolutions" role="tab" aria-controls="mksolutions" aria-selected="true">
+                                <i class="fas fa-server"></i> MK SOLUTIONS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="playsms-tab" data-toggle="tab" href="#playsms" role="tab" aria-controls="playsms" aria-selected="true">
+                                <i class="fab fa-whatsapp"></i> PLAYSMS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="rbfull-tab" data-toggle="tab" href="#rbfull" role="tab" aria-controls="rbfull" aria-selected="true">
+                                <i class="fas fa-bullhorn"></i> RBFULL
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sgp-tab" data-toggle="tab" href="#sgp" role="tab" aria-controls="sgp" aria-selected="true">
+                                <i class="fas fa-satellite-dish"></i> SGP
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="thedude-tab" data-toggle="tab" href="#thedude" role="tab" aria-controls="thedude" aria-selected="true">
+                                <i class="fas fa-user-tie"></i> THE DUDE
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="zabbix-tab" data-toggle="tab" href="#zabbix" role="tab" aria-controls="zabbix" aria-selected="true">
+                                <i class="fas fa-chart-bar"></i> ZABBIX
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- início dos exemplos erps -->
+                    <div class="tab-content" id="myTabContent" style="min-width: 300px;">
+                    <!-- inicio sgp -->
+                    <div class="tab-pane fade " id="sgp" role="tabpanel" aria-labelledby="sgp-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Usando SGP</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Descrição: MarreraAPI
+                      Gateway: HTTP Generico
+                      Config:<span style="color: #906030">{
+                        "url":"https://api.marrera.net/sgp.php",
+                        "u":"<span class="label label-warning">TOKEN</span>"
+                         }
+                             </span> 
+                       </span>
+                    
+                    </pre>
+                    </div>
+                    </div>
+                     </div>
+                    <!-- fim sgp -->
+                    
+                    
+                    <!-- inicio mkauth -->         
+                    <div class="tab-pane fade" id="mkauth" role="tabpanel" aria-labelledby="mkauth-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Usando MK-AUTH</h3>
+                            </div>
+                    
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Usar: <span style="color: #906030"> Usar PlaySMS nas Versões MK-AUTH 22.01 :: L4.9 abaixo</span>
+                    
+                      Servidor:<span style="color: #906030">api.marrera.net/mkauth.php</span>
+                      TOKEN/LOGIN/ID:<span class="label label-warning">TOKEN</span>
+                      Senha:<span class="label label-warning">TOKEN</span>
+                      
+                      *Obs.: colocar a url sem HTTP ou HTTPS, usar iqual ai exemplo acima.
+                      **Obs.: após a configuração, SAIA (logout) e acesse novamente o MKAuth para funcionamento.
+                    
+                      </span> 
+                      <b><hr></b>
+                      <span style="color: #507090">Usar: <span style="color: #906030"> Usar PlaySMS - POST COMPATIVEL nas Versões MK-AUTH 22.02 :: L4.9 acima</span>
+                    
+                      Servidor:<span style="color: #906030">https://api.marrera.net/mk-auth.php</span>
+                      Conta:<span class="label label-warning">TOKEN</span>
+                      Senha:<span class="label label-warning">TOKEN</span>
+                      
+                      *Obs.: Utilizar HTTPS, usar iqual ai exemplo acima.
+                      **Obs.: após a configuração, SAIA (logout) e acesse novamente o MKAuth para funcionamento.
+                    
+                      </span> 
+                       
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim mkauth -->
+                    
+                    <!-- inicio rbfull -->         
+                    <div class="tab-pane fade" id="rbfull" role="tabpanel" aria-labelledby="rbfull-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Usando RB FULL</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> PlaySMS</span>
+                      Servidor playsms *:<span style="color: #906030"> https://api.marrera.net/rbfull.php</span>
+                      Login/username *:<span class="label label-warning">TOKEN</span>
+                      Senha *:<span class="label label-warning">TOKEN</span>
+                    
+                      *Teste o envio de SMS clicando em Enviar SMS de teste.
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim rbfull -->
+                    
+                    <!-- inicio ispfy -->         
+                    <div class="tab-pane fade" id="ispfy" role="tabpanel" aria-labelledby="ispfy-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Usando ISPFY</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span class="label label-warning">1º - Adicionando Modulo</span>
+                      <span style="color: #507090">
+                     Nome do Modulo: OwenBrasil
+                     Tipo do Modulo: Whatsapp
+                     Resposta de sucesso: HTTP Status Code
+                     Dados da requisiçao no formato JSON:<span style="color: #906030">
+                     {
+                        "url": "https://api.marrera.net/ispfy.php",
+                        "timeout" : 5,
+                        "method": "GET",
+                        "verify-ssl": false,
+                        "header": {},
+                        "data": {
+                            "u" : "[PARAM:TOKEN]",
+                            "to" : "+55[TARGET-TEXT]",
+                            "msg" : "[MESSAGE]"
+                        }
+                     }
+                             </span>
+                    Conteudo esperado da mensagem de sucesso:<span style="color: #906030">200</span>  
+                    
+                    
+                      <span class="label label-warning">2º - Adicionando Gateway</span>
+                      
+                      
+                      <span style="color: #507090">Status: <span style="color: #906030"> Ativo</span>
+                      Modulo:<span style="color: #906030"> OwenBrasil(wpp)</span>
+                      Nome do gateway:<span style="color: #906030"> OwenBrasil</span>
+                      Token:<span class="label label-warning">TOKEN</span>
+                      </span> 
+                             
+                       </span>
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim ispfy -->
+                    
+                    <!-- inicio mksolutions -->         
+                    <div class="tab-pane fade" id="mksolutions" role="tabpanel" aria-labelledby="mksolutions-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar o nossa plataforma no MK Solutions:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> INTEGRAÇÃO TIPO $_GET</span>
+                      Usuário: <span class="label label-warning">TOKEN</span>
+                      Senha: <span class="label label-warning">TOKEN</span>
+                      URL:<span style="color: #906030"> https://api.marrera.net/mksolutions.php?token=#password&numero=55#celular&msg=#mensagem
+                    </span>
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim mksolutions -->
+                    
+                    
+                    <!-- inicio gerenet -->         
+                    <div class="tab-pane fade" id="gerenet" role="tabpanel" aria-labelledby="gerenet-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar o nossa plataforma no Gerenet:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> INTEGRAÇÃO TIPO $_GET</span>
+                    
+                      URL:<span style="color: #906030"> https://api.marrera.net/gerenet.php?token=<span class="label label-warning">TOKEN</span>&numero=<span class="label label-warning">55+NUMERO</span>&msg=<span class="label label-warning">MENSAGEM</span>
+                    </span>
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim gerenet -->
+                    
+                    <!-- inicio mikrotik -->         
+                    <div class="tab-pane fade" id="mikrotik" role="tabpanel" aria-labelledby="mikrotik-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar nossa plataforma no MIKROTIK Router OS:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> INTEGRAÇÃO GLOBAL TIPO $_GET</span>
+                    
+                        SCRIPT PARA NÚMERO:<span style="color: #906030"> /tool fetch url="<span style="color: #000001"> https://api.marrera.net/global.php?token=<span class="label label-warning" style="color:#1E00FE">TOKEN</span>&type=<span class="label label-warning" style="color:#1E00FE">text</span>&numero=<span class="label label-warning" style="color:#1E00FE">55+NUMERO</span>&msg=<span class="label label-warning" style="color:#1E00FE">MENSAGEM</span>" keep-result=no </span></span>
+                    
+                        SCRIPT PARA GRUPO:<span style="color: #906030"> /tool fetch url="<span style="color: #000001"> https://api.marrera.net/globalgrupo.php?token=<span class="label label-warning" style="color:#1E00FE">TOKEN</span>&type=<span class="label label-warning" style="color:#1E00FE">text</span>&numero=<span class="label label-warning" style="color:#1E00FE">ID_GRUPO</span>&msg=<span class="label label-warning" style="color:#1E00FE">MENSAGEM</span>" keep-result=no
+                    </span>
+                    </span>
+                      *Substituir os valores TOKEN, NUMERO e MENSAGEM.
+                      **Através desta integração é possível a criação de inúmeros SCRIPT de alerta via Whatsapp com a MarreraAPI.
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim mikrotik -->
+                    
+                    <!-- inicio thedude -->         
+                    <div class="tab-pane fade" id="thedude" role="tabpanel" aria-labelledby="thedude-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar nossa plataforma no The Dude v6:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> Integração com o The Dude acesse Notifications, clique em +.
+                    </span>
+                    
+                    Informe os parâmetros:
+                    Name: MarreraAPI
+                    Enable: Ativado
+                    Type: execute on server
+                    
+                     Command para número: <span style="color:black">local notificationtext "Service [Probe.Name] on [Device.Name] is now [Service.Status]"
+                    /tool fetch url=""https://api.marrera.net/global.php?type=<span class="label label-warning" style="color:#1E00FE">normal</span>&token=<span class="label label-warning" style="color:#1E00FE">TOKEN</span>&numero=<span class="label label-warning" style="color:#1E00FE">55+NUMERO</span>&msg=$notificationtext" keep-result=no
+                      </span> 
+                      </span> 
+                    
+                    Command para grupo: <span style="color: black">local notificationtext "Service [Probe.Name] on [Device.Name] is now [Service.Status]"
+                    /tool fetch url=""https://api.marrera.net/global.php?type=<span class="label label-warning" style="color:#1E00FE">grupo</span>&token=<span class="label label-warning" style="color:#1E00FE">TOKEN</span>&numero=<span class="label label-warning" style="color:#1E00FE">IDGRUPO</span>&msg=$notificationtext" keep-result=no
+                        </span> 
+                      </span> 
+                    Clicar em Settings no topo da tela, acesse a guia Polling e marque MarreraAPI na lista para ativar a notificação para todos os servidores.  
+                    
+                    *Substituir os valores TOKEN, NUMERO.
+                    
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim thedude -->
+                    
+                    <!-- inicio magnusbilling -->         
+                    <div class="tab-pane fade" id="magnusbilling" role="tabpanel" aria-labelledby="magnusbilling-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar nossa plataforma no Magnus Billing:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                    <span style="color: #507090">Acesse: <span style="color: #906030"> Rotas / Tronco / Novo</span>
+                    
+                    Preencha os campos:
+                    Fromdomain: <span style="color: #906030">api.marrera.net</span> 
+                    
+                    Link SMS:<span style="color: #906030">https://api.marrera.net/global.php?token=<span class="label label-warning">TOKEN</span>&numero=55%number%&msg=%text% </span> 
+                    
+                    *Substituir os valores TOKEN.
+                    
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim magnusbilling -->
+                    
+                    <!-- inicio zabbix -->         
+                    <div class="tab-pane fade" id="zabbix" role="tabpanel" aria-labelledby="zabbix-tab">
+                        <div class="box">
+                            <div class="box-header bg-primary">
+                                <h3 class="box-title text-white">Para usar nossa plataforma no ZABBIX:</h3>
+                            </div>
+                            <div class="bg-light border rounded p-3">
+                                <pre class="m-0" style="line-height: 1.5">
+                                    <span style="color: #507090">Para usar o envio com imagens visite nosso GIT:</span>
+                                    <br>
+                                    <span style="color: #906030"><a href="https://github.com/MarreraTech/Zabbix" target="_blank">https://github.com/MarreraTech/Zabbix</a></span>
+                                    <br><br>
+                                    <span style="color: #507090">Criar Script whatsapp.sh para enviar como TEXTO:</span>
+                                    <span style="color: #906030">nano /usr/lib/zabbix/alertscripts/whatsapp.sh</span>
+                                    
+                                    Colar o script:
+                                    <span style="color: #906030">
+                                        <code>
+                                            #!/bin/bash
+                    
+                                            SENDTO=$1
+                                            SUBJECT=$2
+                                            MESSAGE=$3
+                                            TOKEN="SEU TOKEN"
+                    
+                                            parameters=$(cat &lt;&lt;EOF
+                                            {
+                                                "receiver": "$SENDTO",
+                                                "message": {
+                                                    "text": "$SUBJECT \\n$MESSAGE"
+                                                }
+                                            }
+                                            EOF
+                                            )
+                                            url="https://apizap.marrera.net/rest/sendGroup/text/?id=$TOKEN"
+                    
+                                            # Realização da requisição usando curl e armazenamento da resposta
+                                            response=$(curl -s -X POST -H "Content-Type: application/json" -d "$parameters" "$url")
+                                        </code>
+                                    </span>
+                    
+                                    Dar as permissões ao script whatsapp.sh
+                                    <span style="color: #906030">
+                                        <code>
+                                            chmod +x /usr/lib/zabbix/alertscripts/whatsapp.sh
+                                            ln -s /usr/lib/zabbix/alertscripts/whatsapp.sh /usr/bin/whatsapp.sh
+                                            chown zabbix. -R /usr/lib/zabbix/alertscripts
+                                        </code>
+                                    </span>
+                                    <strong>Em casos de dúvidas, contate o suporte para auxílio referente à integração do Módulo Whatsapp.
+                                    Não produzimos script de notificação de nenhuma forma, somente a integração do módulo. O script de alertas e etc é de responsabilidade do usuário!</strong>
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- fim zabbix -->
+                    
+                    <!-- inicio controllr -->         
+                    <div class="tab-pane fade" id="controllr" role="tabpanel" aria-labelledby="controllr-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar o nossa plataforma no Controllr:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Acesse a aba: <span style="color: #906030"> Cadastro >> Mensseger >> Mensseger Apis >> +Novo</span>
+                    
+                    <img src="../admin/img/controllr-integracao.jpeg">
+                    </span>
+                      **Substituir o valor Chave {t}: Pelo seu TOKEN.
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim controllr -->
+                    
+                    <!-- inicio playsms -->         
+                    <div class="tab-pane fade" id="playsms" role="tabpanel" aria-labelledby="playsms-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar nossa plataforma com PlaySMS:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> PLAYSMS TIPO $_GET</span>
+                    
+                      Servidor:<span style="color: #906030"> https://api.marrera.net/playsms.php?u=<span class="label label-warning">TOKEN</span>&to=<span class="label label-warning">55+NUMERO</span>&msg=<span class="label label-warning">MENSAGEM</span>
+                    </span>
+                      **Substituir os valores TOKEN, NUMERO e MENSAGEM.
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim playsms -->
+                    
+                    
+                    <!-- inicio IXC -->         
+                    <div class="tab-pane fade" id="ixc" role="tabpanel" aria-labelledby="ixc-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar nossa plataforma com IXC SOFT:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Novo Gateway: <span style="color: #906030"> escolha PLAYSMS</span>
+                      Login: <span style="color: #906030"> SEUTOKEN</span>
+                      Senha: <span style="color: #906030"> SEUTOKEN</span>
+                      IP:<span style="color: #906030"> api.marrera.net/ixc.php
+                    
+                      **Desativar a caixa shortcode e aumentar o limite de caracteres para 9999.
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim IXC -->
+                    
+                    <!-- inicio global -->         
+                    <div class="tab-pane fade" id="global" role="tabpanel" aria-labelledby="global-tab">
+                        <div class="box">
+                            <div class="box-header">
+                            <h3 class="box-title" style="color:white">Para usar o nossa plataforma em qualquer sistema use a URL abaixo:</h3>
+                            </div>
+                    <div style="background-color: #f7f7f7; border: 1px solid #ccc;  border-radius: 8px;  padding: 10px 20px;  width: auto; overflow: auto;"><pre style="margin: 0; line-height: 100%">
+                      <span style="color: #507090">Tipo de servidor: <span style="color: #906030"> INTEGRAÇÃO GLOBAL TIPO $_GET</span>
+                    
+                                    URL:<span style="color: #000001"> https://api.marrera.net/global.php?token=<span class="label label-warning" style="color:#1E00FE">TOKEN</span>&type=<span class="label label-warning" style="color:#1E00FE">text</span>&numero=<span class="label label-warning" style="color:#1E00FE">55+NUMERO</span>&msg=<span class="label label-warning" style="color:#1E00FE">MENSAGEM</span>
+                    </span>
+                      **Substituir os valores TOKEN, NUMERO e MENSAGEM.
+                    
+                      </span> 
+                    
+                    </pre>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- fim global -->
+                    
+                    </div>
+                    <!-- fim dos exemplos erps -->  
+                    
+                    </div>
+                    <!--Fim Corpo  -->
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

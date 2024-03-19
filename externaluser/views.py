@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth,messages
 from .forms import PerfilForm
 from django.contrib.auth.models import User
@@ -19,6 +20,7 @@ def one_day_hence(data):
     return data + timezone.timedelta(days=1)
 
 # Create your views here.
+@login_required
 def register(request):
     form = PerfilForm()
     if request.method == "POST":
@@ -50,7 +52,7 @@ def register(request):
             messages.success(request, 'algo deu errado')
             
     return render(request, "registration/cadastro.html",{"form": form})
-
+@login_required
 def gerar_fatura(request):
     p = perfil.objects.filter(email=request.user).values('cobrefacil_id','vencimento','plano__price')
     token = autenticar()
@@ -69,6 +71,7 @@ def gerar_fatura(request):
         return redirect('home')
     
 @csrf_exempt
+@login_required
 def webhook(request):
     if request.method == 'POST':
         data = request.body
@@ -93,6 +96,7 @@ def webhook(request):
         return HttpResponse("Webhook received!")
 
 # view para trocar a senha do usuário
+@login_required
 def reset_password(request):
     usuario = User.objects.get(username=request.user)
     new_password = request.POST["senha"]
