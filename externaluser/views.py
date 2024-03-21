@@ -20,7 +20,6 @@ def one_day_hence(data):
     return data + timezone.timedelta(days=1)
 
 # Create your views here.
-@login_required
 def register(request):
     form = PerfilForm()
     if request.method == "POST":
@@ -71,7 +70,6 @@ def gerar_fatura(request):
         return redirect('home')
     
 @csrf_exempt
-@login_required
 def webhook(request):
     if request.method == 'POST':
         data = request.body
