@@ -1,0 +1,132 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ page_title }}</h3>
+                    </div>
+
+                    <form role="form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-4">
+                                        {{form.email.errors}}
+                                        <label for="id_nome">{{form.email.label }}</label>
+                                        {{form.email}}
+                                    </div>
+                                    <div class="col-4">
+                                        {{form.plano.errors}}
+                                        <label for="id_nome">{{form.plano.label }}</label>
+                                        {{form.plano}}
+                                    </div>
+                                    <div class="col-4">
+                                        {{form.vencimento.errors}}
+                                        <label for="id_nome">{{form.vencimento.label }}</label>
+                                        {{form.vencimento}}
+                                    </div>
+                                    <div class="col-4">
+                                        {{form.cpf_cnpj.errors}}
+                                        <label for="id_nome">Escolha entre CPF ou CNPJ</label>
+                                        {{form.cpf_cnpj}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.cpf_or_cnpj.errors}}
+                                        <label for="id_nome">Digite o número do documento</label>
+                                        {{form.cpf_or_cnpj}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.celular.errors}}
+                                        <label for="id_nome">{{form.celular.label }}</label>
+                                        {{form.celular}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.nome.errors}}
+                                        <label for="id_nome">{{form.nome.label }}</label>
+                                        {{form.nome}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.descricaoEndereco.errors}}
+                                        <label for="id_nome">{{form.descricaoEndereco.label }}</label>
+                                        {{form.descricaoEndereco}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.cep.errors}}
+                                        <label for="id_nome">{{form.cep.label }}</label>
+                                        {{form.cep}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.numero.errors}}
+                                        <label for="id_nome">{{form.numero.label }}</label>
+                                        {{form.numero}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.complemento.errors}}
+                                        <label for="id_nome">{{form.complemento.label }}</label>
+                                        {{form.complemento}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.bairro.errors}}
+                                        <label for="id_nome">{{form.bairro.label }}</label>
+                                        {{form.bairro}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.cidade.errors}}
+                                        <label for="id_nome">{{form.cidade.label }}</label>
+                                        {{form.cidade}}
+                                    </div>
+                                    <div class="col-4 mt-2">
+                                        {{form.estado.errors}}
+                                        <label for="id_nome">{{form.estado.label }}</label>
+                                        {{form.estado}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success btn-block">
+                                Atualizar
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+     <!-- Placeholder for the modal -->
+  <div id="modal" class="modal fade">
+    <div id="dialog" class="modal-dialog" hx-target="this"></div>
+  </div>
+
+  <!-- Empty toast to show the message -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div id="toast-body" class="toast-body"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#modal').on('hide.bs.modal', function (event) {
+        $(this).html('');
+        $('#modal').off('hide.bs.modal');
+    });
+
+</script>
+</section>
+{% endblock content %}
+

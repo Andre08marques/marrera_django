@@ -69,7 +69,7 @@ class perfil(models.Model):
     bairro = models.CharField(max_length=50, null=True)
     cidade = models.CharField(max_length=50, null=True)
     estado = models.CharField(choices=estado, max_length=50, null=True)
-    usuario = models.OneToOneField(User, blank=True, null=True, on_delete=models.PROTECT)
+    usuario = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
     cobrefacil_id = models.CharField(max_length=50, null=True)
     vencimento = models.DateField(default=tree_day_hence)
     created_at = models.DateTimeField(default=timezone.now)

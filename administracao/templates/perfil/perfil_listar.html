@@ -1,0 +1,188 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content text-center">
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+              <div class="col-4">
+                <form class="form-inline mb-2">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="pesquisa" placeholder="nome">
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ page_title }}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    {%if page.object_list%}
+                      <div class="card-body">
+                          <table id="example2" class="table table-bordered table-hover">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th>#</th>
+                                  <th scope="col">NOME</th>
+                                  <th scope="col">CPF OU CNPJ</th>
+                                  <th scope="col">PLANO</th>
+                                  <th scope="col">CELULAR</th>
+                                  <th scope="col">VENCIMENTO</th>
+                                  <th scope="col">Opções</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                      {% for perfil in page.object_list %}
+                                          <tr>
+                                              <td>
+                                              {{ forloop.counter }}
+                                              </td>
+                                              <td>
+                                                {{ perfil.nome }}
+                                              </td>
+                                              <td>
+                                                {{ perfil.cpf_or_cnpj }}
+                                                </td>
+                                                <td>
+                                                  {{ perfil.plano }}
+                                                </td>
+                                                <td>
+                                                  {{ perfil.celular }}
+                                                  </td>
+                                                <td>
+                                                  {{ perfil.vencimento }}
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-warning" onclick="copyToClipboard('{{ perfil.id }}')" data-toggle="modal" data-target="#reset_password" href="#"><i class="fas fa-unlock-alt"></i></a>
+                                                    <a class="btn btn-primary" href="{% url 'editarperfil' perfil.id %}"><i class="far fa-edit"></i></a>
+                                                    <a class="btn btn-danger" onclick="return confirm('Você deseja excluir o perfil: {{ perfil.nome }}\n\nProcede?')" href="{% url 'deleteperfil' perfil.id %}"><i class="far fa-trash-alt"></i></a>
+                                                </td>
+                                          </tr>
+                                      {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                    {%else%}
+                      <div class="pt-5 pb-5">
+                            Clique em adicionar para criar um novo perfil
+                      </div>
+                    {%endif%}
+                </div>
+                <div>
+                    <nav aria-label="Page navigation example mt-3">
+                      <ul class="pagination">
+                        <li class="page-item">
+                          {%if page.has_previous%}
+                            <a class="page-link" href="{% url 'whatsapp_list' %}?page={{page.previous_page_number}}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          {%endif%}
+                        </li>
+                        {% for page_number in page.paginator.get_elided_page_range %}
+                              {% if page_number == page.paginator.ELLIPSIS %} 
+                                   {{page_number}}
+                              {% else %}
+                                    <li class="page-item">
+                                        <a href="{% url 'whatsapp_list' %}?page={{page_number}}"
+                                          class="page-link {% if page_number == page.number %}current{% endif %}"
+                                          >{{page_number}}
+                                        </a>
+                                    </li>
+                              {% endif %}
+                        {% endfor %}
+                        <li class="page-item">
+                          {%if page.has_next%}
+                              <a class="page-link" href="{% url 'whatsapp_list' %}?page={{page.next_page_number}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                          {%endif%}
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- INICIO MODAL TROCAR SENHA -->
+  <div class="modal fade" id="reset_password" tabindex="-1" role="dialog" aria-labelledby="reset_password" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Restar password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{%url 'resetpassword' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tem certeza que deseja alterar sua senha?</label>
+                    </div>
+                    <div class=" mb-3 mb-sm-0">
+                        <input type="hidden" required="required" id="id" name="id" placeholder="id">
+                    </div>
+                    <div class=" mb-3 mb-sm-0">
+                        <label for="senha" class="form-label custom-label">Senha</label>
+                        <input type="password" required="required" class="form-control form-control-user" id="senha" name="senha" placeholder="Senha">
+                    </div>
+                    <div class="">
+                        <label for="resenha" class="form-label custom-label">Confirmar senha</label>
+                        <input type="password" required="required" class="form-control form-control-user" id="resenha" name="resenha" placeholder="Confirmar senha...">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i> Voltar
+                    </button>
+                    <button type="submit" class="btn btn-primary" onClick="this.form.submit(); this.disabled=true; this.value='Enviando'; ">
+                        <i class="fas fa-check mr-1"></i> Alterar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- FIM MODAL TROCA SENHA -->
+
+<!-- PEGAR ID CLICK -->
+<script>
+ function copyToClipboard(text){
+    document.getElementById("id").value = text;
+    console.log(text)
+ }
+</script>
+
+<script>
+    let senha = document.getElementById('senha');
+    let senhaC = document.getElementById('resenha');
+
+    function validarSenha() {
+    if (senha.value != senhaC.value) {
+        senhaC.setCustomValidity("Senhas diferentes!");
+        senhaC.reportValidity();
+        return false;
+    } else {
+        senhaC.setCustomValidity("");
+        return true;
+    }
+    }
+
+    // verificar também quando o campo for modificado, para que a mensagem suma quando as senhas forem iguais
+    senhaC.addEventListener('input', validarSenha);
+</script>
+</section>
+{% endblock content %}

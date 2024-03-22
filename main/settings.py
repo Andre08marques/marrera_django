@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'whatsapp',
     'ferramentas',
     'integracoes',
+    'administracao',
     'main',
     'rolepermissions',
     'django.contrib.admin',

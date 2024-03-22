@@ -21,6 +21,7 @@ from whatsapp.views import home
 from externaluser import urls as perfil_urls
 from integracoes import urls as integracoes_urls
 from ferramentas import urls as ferramentas_urls
+from administracao import urls as administracao_urls
 
 
 urlpatterns = [
@@ -31,5 +32,7 @@ urlpatterns = [
     path('zap/', include(whatzapp_urls)),
     path('externaluser/', include(perfil_urls)),
     path('integracoes/', include(integracoes_urls)),
-    path('ferramentas/', include(ferramentas_urls))
+    path('ferramentas/', include(ferramentas_urls)),
+    path('administracao/', include(administracao_urls))
+    
 ]

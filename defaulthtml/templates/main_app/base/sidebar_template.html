@@ -36,10 +36,35 @@
                         </p>
                     </a>
                 </li>
-                <!-- Inicio sidebar perfil -->
+                {% if user|has_role:"admin" %}
+                <!-- Inicio sidebar administração -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="far fa-address-card"></i>
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+
+                            Administração 
+                            <i class="fas fa-angle-left right"></i>
+                            
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'listarperfil' %}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Editar perfil
+
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Inicio sidebar administração -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-address-card"></i>
                         <p>
                             Perfil
                             <i class="fas fa-angle-left right"></i>
@@ -62,7 +87,7 @@
                  <!-- Inicio sidebar ferramentas -->
                  <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-tools"></i>
+                        <i class="nav-icon fas fa-tools"></i>
                         <p>
                             Ferramentas
                             <i class="fas fa-angle-left right"></i>
@@ -98,7 +123,7 @@
                 <!-- whatsapp -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-poll-h"></i>
+                        <i class="nav-icon fas fa-poll-h"></i>
                         <p>
                             Whatzapp
                             <i class="fas fa-angle-left right"></i>
@@ -143,6 +168,7 @@
                             User
                             <i class="fas fa-angle-left right"></i>
                         </p>
+                        
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">

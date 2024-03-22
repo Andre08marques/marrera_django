@@ -15,7 +15,7 @@ class PerfilForm(FormSettings):
 
     class Meta:
         model = perfil
-        fields = ['email','cpf_cnpj','cpf_or_cnpj','celular','nome','plano','descricaoEndereco','cep','numero','complemento','bairro','cidade','estado']
+        fields = ['email','cpf_cnpj','cpf_or_cnpj','celular','nome','plano','vencimento','descricaoEndereco','cep','numero','complemento','bairro','cidade','estado']
         widgets = {
             "celular": forms.TextInput(attrs={'class':'form-control custom-input phone-mask'}),
             "cep": forms.TextInput(attrs={'class':'form-control custom-input'}),
