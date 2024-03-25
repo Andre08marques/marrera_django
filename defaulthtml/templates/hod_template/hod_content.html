@@ -125,6 +125,12 @@
                                                 {{ inst.nome }}
                                             </div>
                                         </h5>
+                                        <!-- Botão para acionar o modal -->
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-danger btn-sm ml-2 mt-2 mt-md-0" data-toggle="modal" data-target="#confirmDeleteModal{{inst.id}}">
+                                                <i class="fas fa-trash-alt mr-1"></i> 
+                                            </button>
+                                        </div>
                                         <p class="card-text">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-key mr-2"></i>
@@ -155,17 +161,15 @@
 
                                         <div class="text-center mt-3">
                                             <!-- Botão de conexão -->
-                                            <a class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0" href="{% url 'conectar' inst.id %}">
+                                            <a class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0" href="{% url 'externaluser_conectar' inst.id %}">
                                                 <i class="fas fa-qrcode mr-1"></i>Conexão Whatsapp
+                                            </a>
+                                            <a class="btn btn-warning btn-sm ml-2 mt-2 mt-md-0" href="{% url 'externaluser_whatsapp_desconect' inst.id %}">
+                                                <i class="fas fa-qrcode mr-1"></i>Desconectar Whatsapp
                                             </a>
                                             <form action="functions/code.php" method="post" class="d-inline">
                                                 <input type="hidden" name="token_instancia" value="<?= $row['token']; ?>">
                                                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $userid; ?>">
-
-                                                <!-- Botão para acionar o modal -->
-                                                <button type="button" class="btn btn-danger btn-sm ml-2 mt-2 mt-md-0" data-toggle="modal" data-target="#confirmDeleteModal{{inst.id}}">
-                                                    <i class="fas fa-trash-alt mr-1"></i> Apagar instância
-                                                </button>
 
                                                 <!-- Modal de confirmação -->
                                                 <div class="modal fade" id="confirmDeleteModal{{inst.id}}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -185,7 +189,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                                                 <!-- Botão para confirmar a exclusão -->
-                                                                <a class="btn btn-danger" href="{% url 'whatsapp_delete' inst.id %}">exluir</a>
+                                                                <a class="btn btn-danger" href="{% url 'externaluser_whatsapp_delete' inst.id %}">exluir</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -218,7 +222,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="post" action="{%url 'whatsapp_form' %}">
+                                <form method="post" action="{%url 'externaluser_criar' %}">
                                     {% csrf_token %}
                                     <div class="modal-body">
                                         <div class="form-group">

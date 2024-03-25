@@ -92,3 +92,4 @@ def gerar_faturar(token, customer_id,  duedate, price):
     return (data)
 
 
+

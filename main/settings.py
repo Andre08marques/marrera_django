@@ -23,6 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # adicionar essa tag para que nosso projeto encontre o .env
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
+DEBUG = os.getenv("DEBUG") == 'True'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
 
@@ -30,7 +32,8 @@ APPEND_SLASH=False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+
+#DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.marrera.net']

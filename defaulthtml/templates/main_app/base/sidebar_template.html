@@ -59,6 +59,16 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{% url 'whatsapp_list' %}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Instâncias
+
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {% endif %}
@@ -120,46 +130,6 @@
                     </ul>
                 </li>
                 <!-- /sidebar ferramentas -->
-                {% if user|has_role:"admin" %}
-                <!-- whatsapp -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-poll-h"></i>
-                        <p>
-                            Whatzapp
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            {% url 'whatsapp_list' as whatsapp_list %}
-                            <a href="{{whatsapp_list}}"
-                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Criar Instância
-
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            {% url 'whatsapp_list' as whatsapp_list %}
-                            <a href="{{whatsapp_list}}"
-                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Grupos
-
-                                </p>
-                            </a>
-                        </li>
-    
-                    </ul>
-                </li>
-                <!-- /whatzapp -->
-                {% endif %}
-
                 <!-- user -->
                 {% if user|has_role:"admin" %}
                 <li class="nav-item has-treeview">
