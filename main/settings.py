@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # adicionar essa tag para que nosso projeto encontre o .env
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-DEBUG = os.getenv("DEBUG") == 'True'
+DEBUG = os.getenv("DEBUG")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
