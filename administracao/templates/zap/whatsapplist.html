@@ -38,7 +38,6 @@
                                   <th>#</th>
                                   <th scope="col">NOME</th>
                                   <th scope="col">KEY</th>
-                                  <th scope="col">PROJETO</th>
                                   <th scope="col">STATUS</th>
                                   <th scope="col">Opções</th>
                                 </tr>
@@ -47,17 +46,14 @@
                                       {% for zap in page.object_list %}
                                           <tr>
                                               <td>
-                                              {{ zap.id }}
+                                                {{ zap.id }}
                                               </td>
                                               <td>
                                                 {{ zap.nome }}
                                               </td>
                                               <td>
                                                 {{ zap.key }}
-                                                </td>
-                                                <td>
-                                                  {{ zap.projeto }}
-                                                </td>
+                                              </td>
                                                 <td>
                                                   {% if zap.status == "open" %}
                                                     <span class="badge badge-pill badge-success">CONECTADO</span>
