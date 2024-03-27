@@ -63,7 +63,7 @@ def listar_perfil(request):
             'page_title': 'Gerenciar Instâncias'
         }
     else:
-       profile = perfil.objects.all().order_by(id)
+       profile = perfil.objects.all().order_by("id")
        profile_paginator = Paginator(profile, 10)
        page_num = request.GET.get('page')
        page = profile_paginator.get_page(page_num)
