@@ -4,7 +4,7 @@ services:
     marrera_django:
         container_name: marrera_django
         build: .
-        command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
+        command: bash -c "gunicorn --config gunicorn_config.py main.wsgi:application"
         ports:
             - "8000:8000"
         volumes:
