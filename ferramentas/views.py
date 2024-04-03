@@ -25,7 +25,7 @@ def listar_grupos(request):
                 'zap': zap
             }
         instancia = (request.POST['pesquisa'])
-        get_key = whatsapp.objects.filter(nome=instancia).values('key')
+        get_key = whatsapp.objects.filter(nome=instancia, usuario=request.user).values('key')
         key = get_key[0]['key']
         grupos = (get_all_grupos(key))
         grupos_atualizado = []
