@@ -16,39 +16,18 @@ from .functions import create_instance,get_instances, instance_connect, instance
 # Create your views here.
 @login_required
 def home(request):
-    instancias = get_instances()
-    if instancias != "timeout": 
-        
-        for instance in instancias:
-            instan = instance['instance']['instanceName']
-            status = instance['instance']['status']
-            whatsapp.objects.filter(key=instan).update(status=status)
-        whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
-        whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
-        whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
-        whatsapp_context = { 
+    whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
+    whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
+    whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
+    whatsapp_context = { 
 
-                    "whatsapp_total": whatsapp_total,
-                    "whatsapp_ativo": whatsapp_ativo,
-                    "whatsapp_inativo": whatsapp_inativo,                     
-        }
-        zap = whatsapp.objects.filter(usuario=request.user)
-        cliente = perfil.objects.filter(usuario=request.user).values("plano__plano","vencimento")
-        cliente_ok = (cliente[0])
-        return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, "cliente": cliente_ok})
-    else:
-        whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
-        whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
-        whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
-        whatsapp_context = { 
-
-                    "whatsapp_total": whatsapp_total,
-                    "whatsapp_ativo": whatsapp_ativo,
-                    "whatsapp_inativo": whatsapp_inativo,                     
-        }
-        zap = whatsapp.objects.filter(usuario=request.user)
-        cliente = perfil.objects.filter(usuario=request.user)
-        return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, cliente: 'cliente'})
+                "whatsapp_total": whatsapp_total,
+                "whatsapp_ativo": whatsapp_ativo,
+                "whatsapp_inativo": whatsapp_inativo,                     
+    }
+    zap = whatsapp.objects.filter(usuario=request.user)
+    cliente = perfil.objects.filter(usuario=request.user)
+    return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, cliente: 'cliente'})
 
 @login_required
 def listar_perfil(request):
