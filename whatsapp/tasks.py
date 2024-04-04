@@ -15,7 +15,6 @@ def check_instance_status():
             status = (instance['instance']['status'])
             #print (nome+" "+status)
             zap = whatsapp.objects.filter(key=nome).update(status=status)
-            print (zap)
     else:
         print ("Task não realizada")
     
