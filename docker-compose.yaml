@@ -9,3 +9,17 @@ services:
             - "8000:8000"
         volumes:
             - ./media:/code/media
+    celery:
+        build: .
+        command: celery -A main worker -l info -c 1 -Q check_instance_status
+        depends_on:
+        - redis
+    celery-beat:
+        build: .
+        command: celery -A main worker --beat
+        depends_on:
+            - redis
+    redis:
+        image: redis:alpine
+        ports:
+            - 6379:6379

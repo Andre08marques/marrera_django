@@ -89,11 +89,6 @@ def reset_password(request):
 #Instâncias
 @login_required
 def whatsapp_list(request):
-    instancias = get_instances()
-    for instance in instancias:
-        instan = instance['instance']['instanceName']
-        status = instance['instance']['status']
-        whatsapp.objects.filter(nome=instan).update(status=status)
     pesquisa = request.GET.get('pesquisa', None)
     if pesquisa:
        zap = whatsapp.objects.filter(nome=pesquisa) 

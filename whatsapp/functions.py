@@ -60,14 +60,15 @@ def get_instances():
     headers = {
                 'apikey': os.getenv('evolutionapikey')
             }
-    
-    try:
-        response = requests.get("https://apiwpp.marrera.net/instance/fetchInstances", timeout=10, headers=headers)
-        data = (response.json())
-        return (data)
-    except requests.exceptions.Timeout:
-        return ("timeout")
-    
+    response = requests.get("https://apiwpp.marrera.net/instance/fetchInstances", timeout=5, headers=headers)
+    if response.ok:
+      data = (response.json())
+      return (data)
+    else:
+      print(data)
+      data = "Error"
+      return(data)
+ 
 #gerar token aleatório
 import string
 import random
