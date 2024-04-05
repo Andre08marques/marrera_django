@@ -69,6 +69,7 @@ def conectar(request, id):
     qr_code_data = f'data:image/png;base64,{encoded_img}'
     zap = whatsapp.objects.filter(usuario=request.user)
     # context
+    zapp = whatsapp.objects.filter(pk=id).update(status="Connecting")
     whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
     whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
     whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
