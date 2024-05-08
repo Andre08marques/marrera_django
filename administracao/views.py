@@ -19,15 +19,17 @@ def home(request):
     whatsapp_total = whatsapp.objects.filter(usuario=request.user).count()
     whatsapp_ativo = whatsapp.objects.filter(usuario=request.user,status="open").count()
     whatsapp_inativo = whatsapp.objects.filter(usuario=request.user,status="close").count()
+    zap = whatsapp.objects.filter(usuario=request.user)
+    cliente = perfil.objects.get(usuario=request.user)
     whatsapp_context = { 
 
                 "whatsapp_total": whatsapp_total,
                 "whatsapp_ativo": whatsapp_ativo,
-                "whatsapp_inativo": whatsapp_inativo,                     
+                "whatsapp_inativo": whatsapp_inativo,  
+                "cliente": cliente,
+                "zap": zap                  
     }
-    zap = whatsapp.objects.filter(usuario=request.user)
-    cliente = perfil.objects.filter(usuario=request.user)
-    return render(request, 'hod_template/hod_content.html',{'whatsapp_context': whatsapp_context, 'zap': zap, cliente: 'cliente'})
+    return render(request, 'hod_template/hod_content.html',whatsapp_context)
 
 @login_required
 def listar_perfil(request):
@@ -156,11 +158,10 @@ def conectar(request, id):
     page_num = request.GET.get('page')
     page = zap_paginator.get_page(page_num)
     context = {
-        'page': page,
         'qrcode': qr_code_data,
         'page_title': 'Gerenciar Instâncias'
     }
-    return render(request, 'zap/whatsapplist.html',context)
+    return render(request, 'includes/modal_qrcode.html',context)
 
 @login_required
 def whatsapp_desconect(request, id):
