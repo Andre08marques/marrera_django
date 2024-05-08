@@ -102,10 +102,7 @@ def whatsapp_list(request):
             'page_title': 'Gerenciar Instâncias'
         }
     else:
-       zap = whatsapp.objects.all()
-       zap_paginator = Paginator(zap, 10)
-       page_num = request.GET.get('page')
-       page = zap_paginator.get_page(page_num)
+       page = whatsapp.objects.all()
        context = {
             'page': page,
             'page_title': 'Gerenciar Instâncias'

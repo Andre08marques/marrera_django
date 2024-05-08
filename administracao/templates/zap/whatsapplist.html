@@ -6,34 +6,17 @@
 
 <section class="content text-center">
     <div class="container-fluid">
-        <div class="row justify-content-between">
-              <div class="col-4">
-                <form class="form-inline mb-2">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="pesquisa" placeholder="nome">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="submit">
-                        <i class="fa fa-search"></i>
-                      </button>
-                    </div>
-                </form>
-              </div>
-            </div>
-            <div class="justify-content-end">
-              <a href="{% url 'whatsapp_form' %}", class="btn btn-secondary btn-lg mr-3 mb-3" role="button" aria-disabled="true">ADICIONAR</a>
-            </div>
-        </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ page_title }}</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    {%if page.object_list%}
-                      <div class="card-body">
-                          <table id="example2" class="table table-bordered table-hover">
-                              <thead class="thead-dark">
+          <div class="col-md-12 text-center">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ page_title }}</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="table_db" class="table table-bordered table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                   <th>#</th>
                                   <th scope="col">NOME</th>
@@ -43,7 +26,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                      {% for zap in page.object_list %}
+                                      {% for zap in page %}
                                           <tr>
                                               <td>
                                                 {{ zap.id }}
@@ -65,18 +48,18 @@
                                                 </td>
                                                 <td>
                                                 {% if zap.status == "open" %}
-                                                    <a class="btn btn-primary" href="{% url 'whatsapp_desconect' zap.id %}">DESCONECTAR</a>
-                                                    <a class="btn btn-danger" href="{% url 'whatsapp_delete' zap.id %}">EXCLUIR</a>
+                                                    <a class="btn btn-warning" href="{% url 'whatsapp_desconect' zap.id %}"><i class="fas fa-qrcode"></i></a>
+                                                    <a class="btn btn-danger" href="{% url 'whatsapp_delete' zap.id %}"><i class="fas fa-trash-alt"></i></a>
                                                 {% else %}
                                                     <a  
                                                     hx-get="{% url 'conectar' zap.id %}" 
-                                                    class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0"
+                                                    class="btn btn-primary"
                                                     hx-target="#dialog" 
                                                     data-toggle="modal"
                                                     data-target="#modal"
-                                                    href="#">AAAA</a>
-                                                    <a class="btn btn-warning" href="{% url 'whatsapp_desconect' zap.id %}">DESCONECTAR</a>
-                                                    <a class="btn btn-danger" href="{% url 'whatsapp_delete' zap.id %}">EXCLUIR</a>
+                                                    href="#"><i class="fas fa-qrcode"></i></a>
+                                                    <a class="btn btn-warning" href="{% url 'whatsapp_desconect' zap.id %}"><i class="fas fa-qrcode"></i></a>
+                                                    <a class="btn btn-danger" href="{% url 'whatsapp_delete' zap.id %}"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                                 {%endif%}
 
@@ -85,11 +68,6 @@
                               </tbody>
                           </table>
                       </div>
-                    {%else%}
-                      <div class="pt-5 pb-5">
-                            Clique em adicionar para criar sua primeira instância
-                      </div>
-                    {%endif%}
                 </div>
                 <div>
                     <nav aria-label="Page navigation example mt-3">
@@ -145,4 +123,23 @@
     </div>
 </div>
 </section>
+{% block custom_js %}
+<script>
+  $(document).ready(function () {
+  $('#table_db').DataTable( {
+      "paging": true,
+      "searching": true,
+      "autoWidth": false,
+      "ordering": true,
+      "columnDefs": [
+          {"width": "50px", "targets": 0},
+          {"width": "250px", "targets": 1},
+      ],
+  }
+  );
+} );
+</script>
+{% endblock custom_js %}
+</section>
 {% endblock content %}
+
