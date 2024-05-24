@@ -92,11 +92,12 @@
     </script>
     <script>
         $(document).ready(function() {
-            // Função para buscar informações com base no CEP
-            function buscarInformacoesCEP(cep) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            // Função para buscar informações com base no CNPJ
+            function buscarInformacoescnpj(cnpj) {
+                fetch(`https://publica.cnpj.ws/cnpj/${cnpj}`)
                     .then(response => response.json())
                     .then(data => {
+                        console.log("OLA")
                         if (!data.erro) {
                             // Preencha os campos com as informações obtidas
                             $('#id_descricaoEndereco').val(data.logradouro);
@@ -111,10 +112,10 @@
             }
 
             // Evento blur para o campo CEP
-            $('#id_cep').on('blur', function() {
-                const cep = $(this).val().replace(/\D/g, ''); // Remove caracteres não numéricos
-                if (cep.length === 8) {
-                    buscarInformacoesCEP(cep);
+            $('#id_cnpj').on('blur', function() {
+                const cnpj = $(this).val().replace(/\D/g, ''); // Remove caracteres não numéricos
+                if (cnpj.length === 14) {
+                    buscarInformacoescnpj(cnpj);
                 }
             });
         });
