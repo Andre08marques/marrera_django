@@ -60,7 +60,7 @@ def get_instances():
     headers = {
                 'apikey': os.getenv('evolutionapikey')
             }
-    response = requests.get("http//164.163.28.109/instance/fetchInstances", timeout=15, headers=headers)
+    response = requests.get("164.163.28.109/instance/fetchInstances", timeout=15, headers=headers)
     if response.ok:
       data = (response.json())
       return (data)
