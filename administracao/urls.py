@@ -14,6 +14,7 @@ urlpatterns = [
     # desconectar com a api do whatsapp
     path('whatsapp_desconect/<int:id>', whatsapp_desconect, name='whatsapp_desconect'),
     # deletar com a api do whatsapp
-    path('whatsapp_delete/<int:id>', whatsapp_delete, name='whatsapp_delete')
+    path('whatsapp_delete/<int:id>', whatsapp_delete, name='whatsapp_delete'),
+    
     
 ]

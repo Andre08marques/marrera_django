@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from whatsapp.models import whatsapp
 from .models import perfil, Fatura_gerada
 from .functions import cadastrar_cliente, autenticar, gerar_faturar
-from administracao.functions import create_instance, instance_connect, instance_desconect, instance_delete
+from administracao.functions import create_instance, instance_connect, instance_desconect, instance_delete,sync_instance
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from datetime import date
@@ -100,6 +100,17 @@ def whatsapp_delete(request, id):
     instancia = get_object_or_404(whatsapp, pk=id)
     dados = instancia.delete()
     print (request.GET)
+    return redirect('home')
+
+@login_required
+def whatsapp_sync(request, id):
+    zapp = whatsapp.objects.get(pk=id)
+    apikey = (zapp.key)
+    nome = (zapp.nome)
+    data = instance_delete(apikey,nome)
+    sync_instance(apikey)
+    zapp.status = "close"
+    zapp.save()
     return redirect('home')
 
 def register(request):

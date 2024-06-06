@@ -186,3 +186,4 @@ def whatsapp_delete(request, id):
     dados = instancia.delete()
     print (request.GET)
     return redirect('whatsapp_list')
+

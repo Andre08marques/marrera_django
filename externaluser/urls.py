@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, gerar_fatura, reset_password, webhook, whatsapp_form,conectar,whatsapp_desconect,whatsapp_delete
+from .views import register, gerar_fatura, reset_password, webhook, whatsapp_form,conectar,whatsapp_desconect,whatsapp_delete,whatsapp_sync
 
 
 urlpatterns = [
@@ -14,5 +14,7 @@ urlpatterns = [
     # desconectar com a api do whatsapp
     path('whatsapp_desconect/<int:id>', whatsapp_desconect, name='externaluser_whatsapp_desconect'),
     # deletar com a api do whatsapp
-    path('whatsapp_delete/<int:id>', whatsapp_delete, name='externaluser_whatsapp_delete')
+    path('whatsapp_delete/<int:id>', whatsapp_delete, name='externaluser_whatsapp_delete'),
+    # syncroniza instance
+    path('whatsapp_sync/<int:id>', whatsapp_sync, name='whatsapp_sync')
 ]

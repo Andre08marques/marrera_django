@@ -22,6 +22,24 @@ def create_instance():
     data = (response.json())
     return data
 
+def sync_instance(apikey):
+    headers = {
+                'Content-Type': 'application/json',
+                'apikey': os.getenv('evolutionapikey')
+            }
+    json_data = {
+                        "instanceName": f"{apikey}",
+                        "qrcode": False,
+                        "token": f"{apikey}"
+
+                        
+                    }
+                                        
+                
+    response = requests.post('https://apiwpp.marrera.net/instance/create', headers=headers, json=json_data)
+    data = (response.json())
+    return data
+
 def instance_connect(apikey, nome):
     headers = {
             'apikey': f'{apikey}'
