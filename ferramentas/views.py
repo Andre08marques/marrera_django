@@ -11,41 +11,29 @@ from django.core.paginator import Paginator
 
 @login_required
 def listar_grupos(request):
-    if request.method == "GET":
-        zap = whatsapp.objects.filter(usuario=request.user, status="open").values('nome')
-        context = {
-                'page_title': 'Listar grupos',
-                'zap': zap
+    zap = whatsapp.objects.filter(usuario=request.user, status="open")
+    context = {
+            'page_title': 'Listar grupos',
+            'zap': zap
+            } 
+    if request.method == "POST":
+        instancia_nome = (request.POST['pesquisa'])
+        instancia = whatsapp.objects.get(nome=instancia_nome)
+        response = (get_all_grupos(instancia.key))
+        if response.status_code == 200:
+            grupo_list = []
+            for grupo in response.json():
+                grupo_list.append({"id": grupo['id'].replace("@g.us", ""),"subject": grupo['subject']})
+            context = {
+               "grupos": grupo_list,
+               "zap": zap
             }
-        return render(request, "grupos/listargrupos.html", context)
-    else:
-        zap = whatsapp.objects.filter(usuario=request.user).values('nome')
-        context = {
-                'page_title': 'Listar grupos',
-                'zap': zap
-            }
-        instancia = (request.POST['pesquisa'])
-        get_key = whatsapp.objects.filter(nome=instancia, usuario=request.user).values('key')
-        key = get_key[0]['key']
-        grupos = (get_all_grupos(key))
-        grupos_atualizado = []
-        for grupo in grupos:
-           grupos_atualizado.append({"id": grupo['id'].replace("@g.us", ""),"subject": grupo['subject']})
-        if 404 in grupos:
-          context = {
-                'page_title': 'Listar grupos',
-                'zap': zap,
-                'grupos': grupos_atualizado
-            }
-          messages.error(request, 'Desculpe! não conseguimos obter seus grupos. Possíveis problemas \n\n *A instância selecionada não está conectada\n *Aconteceu um erro de comunicação com o servidor.')
-          return render(request, "listargrupos.html", context)
+            return render(request, "grupos/listargrupos.html",context)
         else:
-          context = {
-                'page_title': 'Listar grupos',
-                'zap': zap,
-                'grupos': grupos_atualizado
-            }
-          return render(request, "grupos/listargrupos.html",context)
+            messages.error(request, "Não foi possível listar seus grupos. Verifique se sua instância está conectada ou entre em contato com o suporte")
+            return render(request, "grupos/listargrupos.html",context)
+    return render(request, "grupos/listargrupos.html", context)
+      
 
 
 

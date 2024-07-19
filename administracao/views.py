@@ -7,6 +7,7 @@ from django.contrib import auth,messages
 from externaluser.forms import PerfilForm
 from django.contrib.auth.models import User
 from whatsapp.models import whatsapp
+import json
 from .forms import WhatsappForm
 import qrcode
 from io import BytesIO
@@ -137,28 +138,52 @@ def whatsapp_form(request):
                 messages.success(request,'Instância Cadastrada com sucesso')
                 return redirect('whatsapp_list')
 
+# @login_required
+# def conectar(request, id):
+#     zapp = whatsapp.objects.filter(pk=id).values('key','nome')
+#     apikey = (zapp[0]['key'])
+#     nome = (zapp[0]['key'])
+#     sapqrcode = instance_connect(apikey,nome)
+#     print (sapqrcode.json())
+#     code = sapqrcode['code']
+#     qr_code_img = qrcode.make(code)
+#     buffer = BytesIO()
+#     qr_code_img.save(buffer)
+#     buffer.seek(0)
+#     encoded_img = b64encode(buffer.read()).decode()
+#     qr_code_data = f'data:image/png;base64,{encoded_img}'
+#     zap = whatsapp.objects.all()
+#     zap_paginator = Paginator(zap, 10)
+#     page_num = request.GET.get('page')
+#     page = zap_paginator.get_page(page_num)
+#     context = {
+#         'qrcode': qr_code_data,
+#         'page_title': 'Gerenciar Instâncias'
+#     }
+#     return render(request, 'includes/modal_qrcode.html',context)
+
 @login_required
 def conectar(request, id):
-    zapp = whatsapp.objects.filter(pk=id).values('key','nome')
-    apikey = (zapp[0]['key'])
-    nome = (zapp[0]['key'])
-    sapqrcode = instance_connect(apikey,nome)
-    code = sapqrcode['code']
-    qr_code_img = qrcode.make(code)
-    buffer = BytesIO()
-    qr_code_img.save(buffer)
-    buffer.seek(0)
-    encoded_img = b64encode(buffer.read()).decode()
-    qr_code_data = f'data:image/png;base64,{encoded_img}'
-    zap = whatsapp.objects.all()
-    zap_paginator = Paginator(zap, 10)
-    page_num = request.GET.get('page')
-    page = zap_paginator.get_page(page_num)
-    context = {
-        'qrcode': qr_code_data,
-        'page_title': 'Gerenciar Instâncias'
-    }
-    return render(request, 'includes/modal_qrcode.html',context)
+    instancia = whatsapp.objects.get(pk=id)
+    instanciaqrcode = instance_connect(instancia.key,instancia.key)
+    if instanciaqrcode.status_code == 200:
+        data = (instanciaqrcode.json())
+        code = data['code']
+        qr_code_img = qrcode.make(code)
+        buffer = BytesIO()
+        qr_code_img.save(buffer)
+        buffer.seek(0)
+        encoded_img = b64encode(buffer.read()).decode()
+        qr_code_data = f'data:image/png;base64,{encoded_img}'
+        context = {
+            'qrcode': qr_code_data,
+        }
+        return render(request, 'includes/modal_qrcode.html',context)
+    else:
+        context = {
+            "status": "401"
+        }
+        return render(request, 'includes/modal_qrcode.html',context)
 
 @login_required
 def whatsapp_desconect(request, id):

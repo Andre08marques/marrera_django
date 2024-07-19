@@ -9,10 +9,7 @@ def get_all_grupos(key):
     headers = {
     'apikey': f'{key}'
     }
-    try:
-        response = requests.get(url, timeout=10, headers=headers)
-        data = (response.json())
-        return (data)
-    except requests.exceptions.Timeout:
-        data = (response.json())
-        return (data)
+
+    response = requests.get(url,headers=headers)
+    data = (response)
+    return (data)

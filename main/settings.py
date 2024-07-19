@@ -37,7 +37,7 @@ APPEND_SLASH=False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000','https://*.marrera.net']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000','https://app.marrera.net']
+
 
 # Application definition
 

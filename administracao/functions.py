@@ -46,7 +46,7 @@ def instance_connect(apikey, nome):
             }
 
     response = requests.get(f'https://apiwpp.marrera.net/instance/connect/{nome}', headers=headers)
-    data = (response.json())
+    data = (response)
     return (data)
 
 
