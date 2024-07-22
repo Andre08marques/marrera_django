@@ -18,7 +18,7 @@ def listar_grupos(request):
             } 
     if request.method == "POST":
         instancia_nome = (request.POST['pesquisa'])
-        instancia = whatsapp.objects.get(nome=instancia_nome)
+        instancia = whatsapp.objects.get(nome=instancia_nome, usuario=request.user)
         response = (get_all_grupos(instancia.key))
         if response.status_code == 200:
             grupo_list = []
