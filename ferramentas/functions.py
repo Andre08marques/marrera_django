@@ -10,6 +10,6 @@ def get_all_grupos(key):
     'apikey': f'{key}'
     }
 
-    response = requests.get(url,headers=headers, timeout=15)
+    response = requests.get(url,headers=headers, timeout=60)
     data = (response)
     return (data)
