@@ -21,14 +21,18 @@ def listar_grupos(request):
         instancia = whatsapp.objects.get(nome=instancia_nome, usuario=request.user)
         response = (get_all_grupos(instancia.key))
         if response.status_code == 200:
-            grupo_list = []
-            for grupo in response.json():
-                grupo_list.append({"id": grupo['id'].replace("@g.us", ""),"subject": grupo['subject']})
-            context = {
-               "grupos": grupo_list,
-               "zap": zap
-            }
-            return render(request, "grupos/listargrupos.html",context)
+            try:
+                grupo_list = []
+                for grupo in response.json():
+                    grupo_list.append({"id": grupo['id'].replace("@g.us", ""),"subject": grupo['subject']})
+                context = {
+                "grupos": grupo_list,
+                "zap": zap
+                }
+                return render(request, "grupos/listargrupos.html",context)
+            except ValueError:
+                messages.error(request, 'Não existe grupo nessa instância')
+                return redirect('listargrupos')
         else:
             messages.error(request, "Não foi possível listar seus grupos. Verifique se sua instância está conectada ou entre em contato com o suporte")
             return render(request, "grupos/listargrupos.html",context)
