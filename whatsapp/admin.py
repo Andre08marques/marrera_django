@@ -3,8 +3,8 @@ from .models import whatsapp
 
 class Whatsappadmin(admin.ModelAdmin):
     list_display = ('nome', 'key', 'status', 'usuario')
-    list_filter = ('course', 'student')
-    search_fields = ('lasson',)
+    list_filter = ('nome', 'usuario')
+    search_fields = ('usuario',)
 
 admin.site.register(whatsapp,Whatsappadmin)
 
