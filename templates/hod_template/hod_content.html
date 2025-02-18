@@ -1,0 +1,137 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block custom_css %}
+
+
+{% endblock custom_css %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <!-- Card Example - Total de Instâncias -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total de Instâncias</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ total }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-server fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Example - Instâncias Ativas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mensagem enviadas
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ total_conectada }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-code fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Example - Instâncias Desconectadas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Mensagens
+                                    não enviadas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <h5>Total: {{ total_desconectada }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-code fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Example - Instâncias Expiradas -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1">Vencimento -
+                                    {{ owner.due_date }}
+                                </div>
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1">Meu Plano -
+                                    {{ owner.plan }}
+                                </div>
+                                <div class="text-xs font-weight-bold text text-uppercase mb-1" style="color:red;">Para alterar o seu plano chame o suporte!
+                                </div>
+                                </br>
+                                <a href="{% url 'home' %}" class="btn btn-warning" target="_blank" style="color:black;box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);">Gerar Fatura</a>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row --> 
+        
+        <div class="card shadow mb-3">
+            <div class="card-header py-3 shadow-sm" style="background-color: #4e73df;">
+                <h6 class="m-0 font-weight-bold text-white d-flex justify-content-between align-items-center">
+                    <span>Instâncias WhatsApp</span>
+                    <div class="d-flex flex-column flex-sm-row">
+                        <a 
+                        hx-get="{% url 'instanceadd' %}" 
+                        class="btn btn-success mb-2 text-white"
+                        hx-target="#dialog" 
+                        data-toggle="modal"
+                        data-target="#modal"><i class="fas fa-plus mr-1"></i> Criar nova instância</a>
+                        <a href="{% url 'home' %}" class="mb-2 mb-sm-0 ml-sm-2 btn btn-sm btn-light shadow-sm">
+                            <i class="fa fa-code mr-1"></i> Integrações
+                        </a>
+                    </div>
+                </h6>
+            </div>
+        </div>
+
+        <!-- Empty toast to show the message -->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div id="toast-body" class="toast-body"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% include "instancia/instancias_list.html" %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% for instancia in zap %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user mr-2"></i>
+                        {{ instancia.nome }}
+                    </div>
+                </h5>
+                <!-- Botão para acionar o modal -->
+                <div class="float-right">
+                    <a 
+                    class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0"
+                    href="{% url 'instancegrouplist' instancia.id %}"><i class="fas fa-users"></i>
+                    </a>
+                    <a   
+                    onclick="return confirm('Tem certeza que deseja excluir essa instância?')"
+                    class="btn btn-danger btn-sm ml-2 mt-2 mt-md-0"
+                    href="{% url 'instancedelete' instancia.id %}"><i class="fas fa-trash-alt mr-1"></i>
+                    </a>
+                </div>
+                <p class="card-text">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-key mr-2"></i>
+                    <span style="word-break: break-all;">
+                        {{ instancia.key }}
+                    </span>
+                </div>
+                </p>
+                <div hx-get="{% url 'instancestatus' instancia.id %}" hx-trigger="load delay:1s" hx-target="#instancecardstatus_{{ instancia.id }}" hx-swap="outerHTML" >
+                    <h5 class="modal-title">Conexão status: <span id="instancecardstatus_{{ instancia.id }}" class="spinner-border" role="status"></span></h5>
+                </div>
+
+                <div class="text-center mt-3">
+                    <!-- Botão de conexão -->
+                    {% if instancia.status != 'open' %}
+                    <a  
+                    hx-get="{% url 'instanceconect' instancia.id %}" 
+                    class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0"
+                    hx-target="#dialog" 
+                    data-toggle="modal"
+                    data-target="#modal"
+                    href="#"><i class="fas fa-qrcode mr-1"></i>Conexão Whatsapp
+                    </a>
+                    {% endif %}
+                    {% if instancia.status == 'open' %}
+                    <a
+                    onclick="return confirm('Tem certeza que deseja desconectar essa instância?')"
+                    class="btn btn-warning btn-sm ml-2 mt-2 mt-md-0"
+                    href="{% url 'instancedesconect' instancia.id %}"><i class="fas fa-qrcode mr-1"></i>Desconectar Whatsapp
+                    </a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+{% endfor %}
+

@@ -1,0 +1,58 @@
+<div>
+    <nav aria-label="Page navigation mt-2">
+      <ul class="pagination">
+        <li class="page-item">
+          {%if page_obj.has_previous%}
+                {% if page_obj.has_previous %}
+                    {% if request.GET.nome or request.GET.CPF or request.GET.celula or request.GET.status %}
+                    <a href="{% url 'instancegrouplist' instanceid %}?page={{ page_obj.previous_page_number }}&grupo={{request.GET.grupo}}" class="btn btn-outline-primary">&laquo;</a> 
+                    {% else %}
+                    <a href="{% url 'instancegrouplist' instanceid %}?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a> 
+                    {% endif %} 
+                {% endif %}
+  
+          {%endif%}
+        </li>
+        {% for page_number in page_obj.paginator.get_elided_page_range %}
+                {% if request.GET.nome or request.GET.CPF or request.GET.celula or request.GET.status %}  
+                    {% if page_number == page_obj.paginator.ELLIPSIS %} 
+                        {{page_number}}
+                    {% else %}
+                            {% if page_obj.number == page_number %}
+                            <button class="btn btn-outline-primary active">
+                                <span>{{ page_number }} <span class="sr-only">(Atual)</span></span>
+                            </button>
+                            {% else %}
+                            <a href="{% url 'instancegrouplist' instanceid %}?page={{page_number}}&grupo={{request.GET.grupo}}" class="btn btn-outline-primary">
+                                {{ page_number }}
+                            </a>
+                            {% endif %}
+                    {% endif %}
+                {%else%}
+                     {% if page_number == page_obj.paginator.ELLIPSIS %} 
+                        {{page_number}}
+                    {% else %}
+                            {% if page_obj.number == page_number %}
+                            <button class="btn btn-outline-primary active">
+                                <span>{{ page_number }} <span class="sr-only">(Atual)</span></span>
+                            </button>
+                            {% else %}
+                            <a href="{% url 'instancegrouplist' instanceid %}?page={{page_number}}" class="btn btn-outline-primary">
+                                {{ page_number }}
+                            </a>
+                            {% endif %}
+                    {% endif %}
+                {%endif%}
+        {% endfor %}
+        <li class="page-item">
+          {%if page_obj.has_next%}
+                {% if request.GET.nome or request.GET.CPF or request.GET.celula or request.GET.status %}
+                    <a href="{% url 'instancegrouplist' instanceid %}?page={{ page_obj.next_page_number }}&grupo={{request.GET.grupo}}" class="btn btn-outline-primary">&raquo;</a> 
+                {% else %}
+                    <a href="{% url 'instancegrouplist' instanceid %}?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">&raquo;</a> 
+                {% endif %} 
+          {%endif%}
+        </li>
+      </ul>
+    </nav>
+  </div>

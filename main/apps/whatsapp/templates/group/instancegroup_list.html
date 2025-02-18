@@ -1,0 +1,82 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+<section class="content" id="listaraddarea">
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+
+                <div>
+                    <form href="#" hx-target="tbody">
+                        <div class="row ">
+                            <div class="col-md-2 ml-0">
+                                <input type="text" class="form-control" placeholder="Nome do grupo" name='grupo'
+                                    value="{{request.GET.numero}}">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                          
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="card-header">
+                      <h3 class="card-title"><b>{{ page_title }}</b></h3>
+                      <div class="row justify-content-end">
+                        <a href="{% url 'instancegroupsync' instanceid  %}" class="btn btn-success" onclick="handleClick(this)">Sincronizar</a>
+                      </div>
+                      
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">{{ forloop.counter }}</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Grupo ID</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for group in page_obj %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ group.name }}</td>
+                                        <td>{{ group.groupid }}</td>                    
+                                    </tr>
+                                {% empty %}
+                                    <tr><td class="text-center" colspan="7">Grupos não encontrados</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% include './pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+         
+</section>
+{% endblock content %}
+
+
+{% block custom_js %}
+<script>
+    function handleClick(botao) {
+        // Desabilita o botão
+        botao.disabled = true;
+
+        // Adiciona um spinner de loading ao lado do texto
+        botao.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...`;
+    }
+</script>
+
+{% endblock custom_js %}

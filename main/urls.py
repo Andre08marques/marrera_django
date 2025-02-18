@@ -1,38 +1,16 @@
-"""
-URL configuration for main project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
-#from whatsapp import urls as whatzapp_urls
-from administracao.views import home
-from externaluser import urls as perfil_urls
-from integracoes import urls as integracoes_urls
-from ferramentas import urls as ferramentas_urls
-from administracao import urls as administracao_urls
+from main.apps.home.views import Home, UserChangePassword
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path ('', home, name='home'),
-    path ('home/', home, name='home'),
-    #path('zap/', include(whatzapp_urls)),
-    path('externaluser/', include(perfil_urls)),
-    path('integracoes/', include(integracoes_urls)),
-    path('ferramentas/', include(ferramentas_urls)),
-    path('administracao/', include(administracao_urls))
+    path('', Home.as_view()),
+    path('home/', Home.as_view(), name='home'),
+    path('user/', include('main.apps.home.urls')),
+    path('changepassword/', include('django.contrib.auth.urls')),
+    path('externaluser/', include('main.apps.externaluser.urls')),
+    path('instance', include('main.apps.whatsapp.urls')),
+    path('administracao/', include('main.apps.administracao.urls'))
     
 ]

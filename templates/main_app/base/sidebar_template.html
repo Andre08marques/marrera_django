@@ -1,0 +1,134 @@
+{% load static %}
+{% load permission_tags %}
+<aside class="main-sidebar sidebar-dark-info elevation-4">
+    <!-- Brand Logo -->
+    {% if user|has_role:"admin" %}
+    <a href="{% url 'home' %}" class="brand-link">
+        <img src="https://marrera.net/wp-content/uploads/2023/08/2-Logo.fundo_.transparente-2-2048x466.png" alt="AdminLTE Logo"
+            class="brand-image" ><br>
+        <span class="font-weight-light"></span>
+    </a>
+    {% endif %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <nav class="mt-2">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{% static 'dist/img/user.png' %}" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">{{user}}</a>
+                </div>
+            </div>
+        </nav>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    {% url 'home' as home %}
+                    <a href="{{ home }}" class="nav-link {% if home == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Home
+
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    {% url 'home' as home %}
+                        <a hx-get="{% url 'userchangepassword' %}" 
+                        class="nav-link {% if userchangepassword == request.path %} active {% endif %}"
+                        data-toggle="modal" 
+                        data-target="#modal"
+                        hx-target="#dialog"
+                        >
+                        <i class="nav-icon fas fa-lock-open"></i>
+                        <p>
+                            Resetar Senha
+
+                        </p>
+                    </a>
+                </li>
+
+                {% if user|has_role:"admin" %}
+                <!-- Inicio sidebar administração -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+
+                            Administração 
+                            <i class="fas fa-angle-left right"></i>
+                            
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'listarperfil' %}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Editar perfil
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'whatsapp_list' %}"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Instâncias
+
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                <!-- Inicio sidebar administração -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-address-card"></i>
+                        <p>
+                            Perfil
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" data-toggle="modal" data-target="#reset_password"
+                                class="nav-link  {% if campanhaform == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Resetar Senha
+
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+               
+                
+                <!-- /.user -->
+
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}"
+                        onclick="return confirm('Sua sessão seria encerrada.\n\nProcede?')"
+                        class="nav-link">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
