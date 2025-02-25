@@ -45,6 +45,25 @@ class Instanceadd(View):
             instance.status = 'close'
             instance.save()
             return redirect("home") 
+
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class InstanceRecreate(View):
+
+    def get(self, request, id):
+        instancia = whatsapp.objects.get(pk=id)
+        ev = Evolution()
+        try:
+            instance_desconectar = ev.instance_desconect(instancia.key, instancia.key)
+            instance_delete = ev.instance_delete(instancia.key, instancia.key)
+            instance_create = ev.instance_recreate(instancia.nome, instancia.key)
+            messages.success(request,f'Intancia recriada com sucesso')
+            return redirect("home")
+        except HttpErrors as errors:
+            instance_delete = ev.instance_delete(instancia.key, instancia.key)
+            instance_create = ev.instance_recreate(instancia.nome, instancia.key)
+            messages.success(request,f'Intancia recriada com sucesso')
+            return redirect('home')
         
     
 @method_decorator(login_required(login_url='login'), name='dispatch')
@@ -120,7 +139,7 @@ class Instancedelete(View):
             instancia.delete()
             return redirect("home")
         except HttpErrors as errors:
-            messages.error(request,f'Houve um erro ao tentar excluir instância. Erro: {errors} Se esse erro persistir, entre em contato com o suporte.')
+            instancia.delete()
             return redirect('home')
 
 

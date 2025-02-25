@@ -45,6 +45,36 @@ class Evolution():
             raise HttpErrors(
                 message=response.json()['response']['message'], status_code=status_code
             )
+    
+    def instance_recreate(self, name, key):
+        hash = gerar_chave()
+        headers = {
+            "apikey": f"{self.__evolutionmasterkey}"
+        }
+
+        json = {
+            "instanceName": f"{key}",
+            "qrcode": False,
+            "token": f"{key}",
+            "groups_ignore": "false",
+        }
+        
+        response = requests.post(
+            url=f"{self.__base_url}/instance/create",
+            headers=headers,
+            json=json
+        )
+        status_code = response.status_code
+        if ((status_code >= 200) and (status_code <= 299)):
+            data = {
+                "status_code": response.status_code,
+                "response": response.json()
+            }
+            return data
+        else: 
+            raise HttpErrors(
+                message=response.json()['response']['message'], status_code=status_code
+            )
             
     
     def instance_status(self, name, key):
