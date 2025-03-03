@@ -11,6 +11,7 @@ urlpatterns = [
     path('changepassword/', include('django.contrib.auth.urls')),
     path('externaluser/', include('main.apps.externaluser.urls')),
     path('instance', include('main.apps.whatsapp.urls')),
-    path('administracao/', include('main.apps.administracao.urls'))
+    path('administracao/', include('main.apps.administracao.urls')),
+    path('api/v1/', include('main.apps.webhook.urls'))
     
 ]

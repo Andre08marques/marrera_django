@@ -19,6 +19,13 @@
                     class="btn btn-primary btn-sm ml-2 mt-2 mt-md-0"
                     href="{% url 'instancegrouplist' instancia.id %}"><i class="fas fa-users"></i>
                     </a>
+
+                    <a 
+                    class="btn btn-success btn-sm ml-2 mt-2 mt-md-0"
+                    href="{% url 'instancemensagemlist' instancia.id %}"><i class="fas fa-comment-dots"></i>
+                    
+                    </a>
+                    
                     <a   
                     onclick="return confirm('Tem certeza que deseja excluir essa instância?')"
                     class="btn btn-danger btn-sm ml-2 mt-2 mt-md-0"

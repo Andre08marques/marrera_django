@@ -1,0 +1,17 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{{ request.path }}" method="post" class="modal-content" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h5 class="modal-title">Mostrar Log</h5>
+    </div>
+    <div class="modal-body">
+
+        <textarea class="form-control" disabled  id="exampleFormControlTextarea1" rows="6">{{ mensagem.log }}</textarea>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">FECHAR</button>
+        <button id="btnSave" type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>

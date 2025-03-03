@@ -1,0 +1,85 @@
+{% extends 'main_app/base/base.html' %}
+{% load static %}
+{% block page_title %}{{ page_title }}{% endblock page_title %}
+
+{% block content %}
+<section class="content" id="listaraddarea">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div>
+                    <form href="{{ request.path }}" hx-target="tbody">
+                        <div class="row ">
+                            
+                            <div class="col-md-2">
+                                <label for="status">Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="">----</option>
+                                    <option value="1">Mensagem enviada</option>
+                                    <option value="2">Mensagem não enviada</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 ml-0">
+                                <label for="numero">Número</label>
+                                <input type="text" class="form-control" placeholder="Número" name='numero'
+                                    value="{{request.GET.numero}}">
+                            </div>
+
+                            <div class="col-md-2" style="margin-top: 31px;">
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title"><b>{{ page_title }}</b></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="table_db" class="table table-hover" style="table-layout: fixed; width: 100%">
+                            <thead>
+                              <tr>
+                                <th scope="col">Instancia</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">status</th>
+                                <th scope="col">Data</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for msg in page_obj %}
+                                    <tr>
+                                    <td>{{ msg.Instance }}</td>
+                                    <td>{{ msg.numero }}</td>
+                                    {% if  msg.status == "1" %}
+                                    <td><span class="badge badge-pill badge-success">{{ msg.get_status_display }}</span></td>
+                                    {% else %}
+                                    <td><span class="badge badge-pill badge-danger">{{ msg.get_status_display }}</span></td>
+                                    {% endif %}
+                                    <td>{{ msg.created_at }}</td>
+                                    </tr>
+                                {% empty %}
+                                    <tr><td class="text-center" colspan="7">Não existe Mensagens</td></tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                          {% include './pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+{% block custom_js %} 
+
+{% endblock custom_js %}

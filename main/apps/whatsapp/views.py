@@ -8,7 +8,7 @@ from django.views import View
 from django.contrib import messages
 from .forms import Instanciaform
 from django.contrib.auth.models import User
-from main.apps.whatsapp.models import whatsapp, InstanceGroup
+from main.apps.whatsapp.models import whatsapp, InstanceGroup, Mensagem
 from main.src.agents.evolution_agent import Evolution
 from main.src.httperro import HttpErrors
 import qrcode
@@ -196,3 +196,44 @@ class InstanceGroupSync(View):
         messages.error(request, "Não foi possível sincronizar os grupos. se esse erro persistir, entre em contato com o suporte.")
         url = reverse("instancegrouplist", args=[id])
         return redirect(url)
+    
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class MsgList(View):
+
+    def get(self, request, id):
+        owner = User.objects.get(username=request.user)
+        mensagens = Mensagem.objects.filter(owner=owner)
+
+        
+        status = request.GET.get('status')
+        numero = request.GET.get('numero')
+        instance = request.GET.get('instance')
+
+        filter_query =  Q()
+        
+        
+        if is_valid_queryparam(instance):
+            filter_query.add(Q(Instance=instance), Q.AND)
+
+        if is_valid_queryparam(status):
+            filter_query.add(Q(status=status), Q.AND)
+
+        if is_valid_queryparam(numero):
+            filter_query.add(Q(numero__icontains=numero), Q.AND)
+        
+        filter_query.add(Q(owner=owner), Q.AND)
+        
+        mensagens = Mensagem.objects.filter(filter_query)
+
+
+        paginator = Paginator(mensagens, 15)
+        page_number = request.GET.get('page') 
+        page_obj = paginator.get_page(page_number) 
+
+        context = {
+            "page_title": "Mensagens enviadas",
+            "page_obj": page_obj
+        }
+
+        return render(request, 'mensagens/mensagens.html', context)

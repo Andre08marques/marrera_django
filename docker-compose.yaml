@@ -11,7 +11,7 @@ services:
             - ./media:/code/media
     celery:
         build: .
-        command: celery -A main worker -l info -c 1 -Q check_instance_status
+        command: celery -A main worker -l info
         depends_on:
         - redis
     celery-beat:

@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ninja_jwt',
     'ninja_extra',
+    'rest_framework',
     # my apps 
     'main.apps.externaluser',
     'main.apps.whatsapp',
     'main.apps.administracao',
     'main.apps.home',
+    'main.apps.webhook',
     #celery
     'django_celery_results',
     'django_celery_beat'
@@ -200,7 +202,8 @@ LOGIN_REDIRECT_URL = 'home'
 # SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 
-
+#SLEP_SEND_MSG
+SLEEPMSG=config('SLEEPMSG')
 
 # Se tiver configuração de email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
