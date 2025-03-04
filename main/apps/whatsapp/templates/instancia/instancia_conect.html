@@ -3,16 +3,13 @@
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <div hx-get="{% url 'instancestatus' instanceid %}" hx-trigger="every 2s" hx-target="#instancestatus_{{ instancia.id }}" hx-swap="outerHTML">
-            <h5 class="modal-title">Conexão com whatsapp: <span id="instancestatus_{{ instancia.id }}" class="spinner-border" role="status"></span></h5>
-            
-        </div>
+        <h5 class="modal-title">Conexão com whatsapp</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
-        {% if qrcode %}
+        {% if status %}
             <h5>Não foi possível gerar o qrcode</h5>
             <p><img src="{% static 'dist/img/triste.png' %}" width="300" height="300"/>
         {% else %}
@@ -20,7 +17,7 @@
         {% endif %}
       </div>
       <div class="modal-footer">
-        <a type="button" href="{% url 'home' %}" class="btn btn-secondary">CONCLUIR</a>
+        <a type="button" href="{% url 'home' %}" class="btn btn-secondary" data-dismiss="modal">CONCLUIR</a>
     </div>
     </div>
   </div>
