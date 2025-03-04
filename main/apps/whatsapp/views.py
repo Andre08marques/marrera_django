@@ -59,8 +59,7 @@ class InstanceRecreate(View):
             instance_create = ev.instance_recreate(instancia.nome, instancia.key)
             messages.success(request,f'Intancia recriada com sucesso')
             return redirect("home")
-        except HttpErrors as errors:
-            instance_delete = ev.instance_delete(instancia.key, instancia.key)
+        except:
             instance_create = ev.instance_recreate(instancia.nome, instancia.key)
             messages.success(request,f'Intancia recriada com sucesso')
             return redirect('home')
@@ -113,7 +112,7 @@ class Instanceconect(View):
             return render(request, 'instancia/instancia_conect.html',context)
         except HttpErrors as errors:
             messages.error(request,f'Houve um erro ao tentar conectar instância. Erro: {errors} Se esse erro persistir, entre em contato com o suporte.')
-            return redirect('home')
+            return render(request, 'instancia/instancia_conect.html')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class Instancedesconect(View):

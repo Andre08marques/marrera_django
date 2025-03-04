@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
+
 
 
 # Create your models here.
@@ -74,6 +76,14 @@ class perfil(models.Model):
     vencimento = models.DateField(default=tree_day_hence)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+
+    def adicionar_mes(self):
+        if self.vencimento:
+            self.vencimento += relativedelta(months=1)
+        else:
+            self.vencimento = timezone.now().date() + relativedelta(months=1)
+        self.save()
+
     def __str__(self):
         return self.nome
 
