@@ -54,13 +54,20 @@ class InstanceRecreate(View):
         instancia = whatsapp.objects.get(pk=id)
         ev = Evolution()
         try:
+            
             instance_desconectar = ev.instance_desconect(instancia.key, instancia.key)
             instance_delete = ev.instance_delete(instancia.key, instancia.key)
             instance_create = ev.instance_recreate(instancia.nome, instancia.key)
+            instancia.key = instance_create['response']['token']
+            instancia.status = 'close'
+            instancia.save()
             messages.success(request,f'Intancia recriada com sucesso')
             return redirect("home")
-        except:
+        except HttpErrors as errors:
             instance_create = ev.instance_recreate(instancia.nome, instancia.key)
+            instancia.key = instance_create['response']['token']
+            instancia.status = 'close'
+            instancia.save()
             messages.success(request,f'Intancia recriada com sucesso')
             return redirect('home')
         
