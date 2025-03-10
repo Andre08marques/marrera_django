@@ -63,6 +63,7 @@
                                                   {{ perfil.vencimento }}
                                                 </td>
                                                 <td>
+                                                  
                                                     <a class="btn btn-warning" onclick="copyToClipboard('{{ perfil.id }}')" data-toggle="modal" data-target="#reset_password" href="#"><i class="fas fa-unlock-alt"></i></a>
                                                     <a class="btn btn-primary" href="{% url 'editarperfil' perfil.id %}"><i class="far fa-edit"></i></a>
                                                     <a class="btn btn-danger" onclick="return confirm('Você deseja excluir o perfil: {{ perfil.nome }}\n\nProcede?')" href="{% url 'deleteperfil' perfil.id %}"><i class="far fa-trash-alt"></i></a>

@@ -55,7 +55,12 @@
                                                     <a class="btn btn-warning" href="{% url 'whatsapp_desconect' zap.id %}"><i class="fas fa-qrcode"></i></a>
                                                     <a class="btn btn-danger" href="{% url 'whatsapp_delete' zap.id %}"><i class="fas fa-trash-alt"></i></a>
                                                 {% else %}
-                                                    <a  
+                                                    <a
+                                                    class="btn btn-success"
+                                                    onclick="return confirm('Tem certeza que deseja recriar a instância?')" 
+                                                    href="{% url 'instancerecreate' zap.id %}"
+                                                    >Recriar</a>
+                                                    <a
                                                     hx-get="{% url 'conectar' zap.id %}" 
                                                     class="btn btn-primary"
                                                     hx-target="#dialog" 

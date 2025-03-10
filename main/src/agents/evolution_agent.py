@@ -17,21 +17,14 @@ class Evolution():
         
     
     def instance_create(self, name):
-        hash = gerar_chave()
-        headers = {
-            "apikey": f"{self.__evolutionmasterkey}"
-        }
-
+        
         json = {
-            "instanceName": f"{hash}",
-            "qrcode": False,
-            "token": f"{hash}",
+            "token": f"{self.__evolutionmasterkey}",
             "groups_ignore": "false",
         }
         
         response = requests.post(
-            url=f"{self.__base_url}/instance/create",
-            headers=headers,
+            url=f"{self.__base_url}/instance",
             json=json
         )
         status_code = response.status_code
@@ -40,6 +33,7 @@ class Evolution():
                 "status_code": response.status_code,
                 "response": response.json()
             }
+            
             return data
         else: 
             raise HttpErrors(
@@ -53,14 +47,12 @@ class Evolution():
         }
 
         json = {
-            "instanceName": f"{key}",
-            "qrcode": False,
-            "token": f"{key}",
+            "token": f"{self.__evolutionmasterkey}",
             "groups_ignore": "false",
         }
         
         response = requests.post(
-            url=f"{self.__base_url}/instance/create",
+            url=f"{self.__base_url}/instance",
             headers=headers,
             json=json
         )
@@ -84,7 +76,7 @@ class Evolution():
         }
 
         response = requests.get(
-                url=f"{self.__base_url}/instance/connectionState/{name}",
+                url=f"{self.__base_url}/instance/state/{name}",
                 headers=headers,
             )
         
@@ -108,7 +100,7 @@ class Evolution():
         }
         
         response = requests.get(
-                url=f"{self.__base_url}/instance/connect/{name}",
+                url=f"{self.__base_url}/instance/{name}",
                 headers=headers,
             )
         
@@ -119,6 +111,7 @@ class Evolution():
                 "status_code": response.status_code,
                 "response": response.json()
             }
+            print (data)
             return data
         else: 
             raise HttpErrors(
@@ -131,7 +124,7 @@ class Evolution():
             "apikey": f"{key}"
         }
 
-        response = requests.delete(
+        response = requests.put(
                 url=f"{self.__base_url}/instance/logout/{name}",
                 headers=headers,
             )
@@ -143,6 +136,7 @@ class Evolution():
                 "status_code": response.status_code,
                 "response": response.json()
             }
+            print (data)
             return data
         else: 
             raise HttpErrors(
@@ -154,10 +148,14 @@ class Evolution():
         headers = {
             "apikey": f"{key}"
         }
+        json = {
+            "token": "{{token}}"
+        }
 
         response = requests.delete(
-                url=f"{self.__base_url}/instance/delete/{name}",
+                url=f"{self.__base_url}/instance/{name}",
                 headers=headers,
+                json=json
             )
         
         status_code = response.status_code

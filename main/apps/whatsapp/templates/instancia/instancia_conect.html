@@ -11,7 +11,7 @@
       <div class="modal-body text-center">
         {% if status %}
             <h5>Não foi possível gerar o qrcode</h5>
-            <p><img src="{% static 'dist/img/triste.png' %}" width="300" height="300"/>
+            <p><img src="{% static 'dist/img/triste.png' %}" width="400" height="400"/>
         {% else %}
             <p><img src="{{ qrcode }}" width="300" height="300"/>
         {% endif %}

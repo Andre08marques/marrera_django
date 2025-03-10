@@ -41,7 +41,7 @@ class Instanceadd(View):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.usuario = user
-            instance.key = instancia['response']['hash']['apikey']
+            instance.key = instancia['response']['token']
             instance.status = 'close'
             instance.save()
             return redirect("home") 
